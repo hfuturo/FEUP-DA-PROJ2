@@ -1,1 +1,13 @@
+#cmake
+cmake-build-debug/
+build/
+
+#macOS
 .DS_Store
+
+#doxygen
+docs/
+
+#IDE
+.idea/
+.vscode
