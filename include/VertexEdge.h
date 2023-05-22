@@ -2,6 +2,7 @@
 #define DA_PROJ2_VERTEXEDGE_H
 
 #include <vector>
+#include <string>
 
 class Edge;
 
@@ -15,6 +16,11 @@ private:
     int id;
 
     /**
+     * @brief The name of the vertex
+     */
+    std::string name;
+
+    /**
      * @brief A vector with the outgoing edges.
      */
     std::vector<Edge*> adj;
@@ -26,11 +32,19 @@ private:
 
 public:
     /**
-     * @brief Constructor that initializes a vertex.
+     * @brief Constructor that initializes a vertex with id.
      *
      * @param id The vertex id.
      */
     Vertex(const int id);
+
+    /**
+     * @brief Constructor that initializes a vertex with id and name.
+     *
+     * @param id
+     * @param name
+     */
+    Vertex(const int id, std::string& name);
 
     /**
      * @brief Returns the id of a vertex.

@@ -4,6 +4,8 @@
 
 Vertex::Vertex(const int id): id(id) {}
 
+Vertex::Vertex(const int id, std::string &name): id(id), name(name) {}
+
 int Vertex::getId() const {
     return this->id;
 }

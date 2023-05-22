@@ -1,6 +1,7 @@
-//
-// Created by Henrique Silva on 15/05/2023.
-//
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <iostream>
 
 #include "../include/Graph.h"
 #include "../include/VertexEdge.h"
@@ -33,4 +34,31 @@ bool Graph::addEdge(const int origin, const int dest, const double distance) {
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
+}
+
+void Graph::readVertices(const std::string& path) {
+    std::ifstream file(path);
+
+    if (file.fail()) return;
+
+    std::string id, dest, distance, name, fileLine, destName;
+
+    getline(file, fileLine);
+    if (fileLine.size() == 52) {
+        while (getline(file, fileLine)) {
+            std::stringstream ss(fileLine);
+            getline(ss, id, ',');
+            getline(ss, dest, ',');
+            getline(ss, distance, ',');
+            getline(ss, name, ',');
+            getline(ss, destName);
+
+            if (findVertex(std::stoi(id)) != nullptr) continue;
+            addVertex(std::stoi(id));
+        }
+    }
+}
+
+void Graph::fill(const std::string& path) {
+    readVertices(path);
 }
