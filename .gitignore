@@ -11,3 +11,6 @@ docs/
 #IDE
 .idea/
 .vscode
+
+#dataset too big for github
+*.csv
