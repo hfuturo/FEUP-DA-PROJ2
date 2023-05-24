@@ -14,6 +14,14 @@ void Vertex::setId(const int id) {
     this->id = id;
 }
 
+std::vector<Edge *> Vertex::getAdj() const {
+    return this->adj;
+}
+
+std::vector<Edge *> Vertex::getIncoming() const {
+    return this->incoming;
+}
+
 Edge *Vertex::addEdge(Vertex *dest, const double distance) {
     if (dest == nullptr || distance < 0) return nullptr;
     Edge* edge = new Edge(this, dest, distance);

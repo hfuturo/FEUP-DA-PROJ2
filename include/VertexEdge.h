@@ -71,6 +71,23 @@ public:
      */
     Edge* addEdge(Vertex* dest, const double distance);
 
+    /**
+     * @brief Gets the outgoing edges of this vertex.
+     *
+     * @note Complexity time: O(1)
+     *
+     * @return Vector with the outgoing edges.
+     */
+    std::vector<Edge*> getAdj() const;
+
+    /**
+     * @brief Gets the incoming edges of this vertex.
+     *
+     * @note Complexity time: O(1)
+     *
+     * @return Vector with the incoming edges.
+     */
+    std::vector<Edge*> getIncoming() const;
 
 };
 

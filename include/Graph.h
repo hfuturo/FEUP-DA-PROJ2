@@ -43,7 +43,7 @@ public:
       * @return True if the edge was successfullu added.
       * @return False otherwise.
       */
-     bool addEdge(const int origin, const int  dest, const double distance);
+     bool addBidirectionalEdge(const int origin, const int  dest, const double distance);
 
      /**
       * @brief Searches all the vertices and returns one if the given id exists.
@@ -67,6 +67,13 @@ public:
       * @note Complexity time: O(V)
       */
      void readVertices(const std::string& path);
+
+     /**
+      * @brief Reads the edges from the file and adds them into the graph.
+      *
+      * @note Complexity time: O(E)
+      */
+     void readEdges(const std::string& path);
 };
 
 #endif //DA_PROJ2_GRAPH_H

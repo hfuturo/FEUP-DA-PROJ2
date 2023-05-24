@@ -24,7 +24,7 @@ Vertex *Graph::findVertex(const int id) const {
     return nullptr;
 }
 
-bool Graph::addEdge(const int origin, const int dest, const double distance) {
+bool Graph::addBidirectionalEdge(const int origin, const int dest, const double distance) {
     if (distance < 0 || origin < 0 || dest < 0) return false;
     auto v1 = findVertex(origin);
     auto v2 = findVertex(dest);
@@ -41,24 +41,57 @@ void Graph::readVertices(const std::string& path) {
 
     if (file.fail()) return;
 
-    std::string id, dest, distance, name, fileLine, destName;
+    int count = 0;
+    std::string id, dest, name, destName, distance, fileLine, trash;
 
     getline(file, fileLine);
-    if (fileLine.size() == 52) {
-        while (getline(file, fileLine)) {
-            std::stringstream ss(fileLine);
-            getline(ss, id, ',');
-            getline(ss, dest, ',');
-            getline(ss, distance, ',');
+    std::stringstream ssTrash(fileLine);
+
+    while (getline(ssTrash, trash, ',')) count ++;
+
+    while (getline(file, fileLine)) {
+        std::stringstream ss(fileLine);
+        getline(ss, id, ',');
+        getline(ss, dest, ',');
+        getline(ss, distance, ',');
+        if (count == 5) {
             getline(ss, name, ',');
             getline(ss, destName);
-
-            if (findVertex(std::stoi(id)) != nullptr) continue;
-            addVertex(std::stoi(id));
         }
+        if (findVertex(std::stoi(id)) == nullptr) addVertex(std::stoi(id));
+        if (findVertex(std::stoi(dest)) == nullptr) addVertex(std::stoi(dest));
     }
+}
+
+void Graph::readEdges(const std::string &path) {
+    std::ifstream file(path);
+
+    if (file.fail()) return;
+
+    int count = 0;
+    std::string fileLine, id, dest, distance, name, destName;
+
+    getline(file, fileLine);
+    std::stringstream ssTrash(fileLine);
+
+    while (getline(ssTrash, fileLine, ',')) count++;
+
+    while (getline(file, fileLine)) {
+        std::stringstream ss(fileLine);
+        getline(ss, id, ',');
+        getline(ss, dest, ',');
+        getline(ss, distance, ',');
+        if (count == 5) {
+            getline(ss, name, ',');
+            getline(ss, destName);
+        }
+
+        addBidirectionalEdge(std::stoi(id), std::stoi(dest), std::stod(distance));
+    }
+
 }
 
 void Graph::fill(const std::string& path) {
     readVertices(path);
+    readEdges(path);
 }

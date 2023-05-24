@@ -5,7 +5,5 @@
 int main() {
     Graph graph;
     graph.fill(TOY_GRAPH_TOURISM);
-    for (auto v : graph.getVertexSet()) {
-        std::cout << v->getId() << std::endl;
-    }
+
 }
