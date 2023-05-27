@@ -74,6 +74,13 @@ public:
       * @note Complexity time: O(E)
       */
      void readEdges(const std::string& path);
+
+     /**
+      * @brief Performs a brute force algorithm to finds the tsp of a graph
+      *
+      * @note Complexity time: O(n*n!)
+      */
+     void tspBF();
 };
 
 #endif //DA_PROJ2_GRAPH_H

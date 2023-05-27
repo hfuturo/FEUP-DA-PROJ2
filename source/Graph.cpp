@@ -2,6 +2,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 #include "../include/Graph.h"
 #include "../include/VertexEdge.h"
@@ -89,6 +90,56 @@ void Graph::readEdges(const std::string &path) {
         addBidirectionalEdge(std::stoi(id), std::stoi(dest), std::stod(distance));
     }
 
+}
+
+void Graph::tspBF() {
+    if (getVertexSet().empty()) return;
+    std::cout << "calculating ...\n";
+    double minDistance = INT_MAX;
+
+    std::vector<int> path;
+    std::vector<int> order;
+
+    for (int i = 0; i < getVertexSet().size(); i++) {
+        order.push_back(i);
+    }
+
+    std::sort(order.begin(), order.end());
+    do {
+        double distance = 0;
+        for (int i = 0; i < getVertexSet().size(); i++) {
+            auto edges = getVertexSet().at(order.at(i))->getAdj();
+
+            if (i == getVertexSet().size() - 1) {
+                for (auto& e : edges) {
+                    if (e->getDest()->getId() == 0) {
+                        distance += e->getDistance();
+                    }
+                }
+            }
+            else {
+                for (auto& e : edges) {
+                    if (e->getDest()->getId() == order.at(i+1)) {
+                        distance += e->getDistance();
+                    }
+                }
+            }
+        }
+
+        if (distance < minDistance) {
+            minDistance = distance;
+            path.clear();
+            for (int i = 0; i < order.size(); i++) {
+                path.push_back(order.at(i));
+            }
+        }
+    } while (std::next_permutation(order.begin() + 1, order.end()));
+
+
+    for (int i = 0; i < path.size(); i++) {
+        std::cout << path.at(i) << " ";
+    }
+    std::cout << minDistance << std::endl;
 }
 
 void Graph::fill(const std::string& path) {
