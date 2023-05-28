@@ -106,32 +106,46 @@ void Graph::tspBF() {
 
     std::sort(order.begin(), order.end());
     do {
+        bool validPath = true;
         double distance = 0;
+      //  std::cout << "NEW" << std::endl;
         for (int i = 0; i < getVertexSet().size(); i++) {
+           // std::cout << getVertexSet().at(order.at(i))->getId() << std::endl;
+          //  std::cout << "\tTO: ";
             auto edges = getVertexSet().at(order.at(i))->getAdj();
+            auto prevDistance = distance;
 
             if (i == getVertexSet().size() - 1) {
                 for (auto& e : edges) {
                     if (e->getDest()->getId() == 0) {
                         distance += e->getDistance();
+                    //    std::cout << " 0 com distancia: " << distance << std::endl;
                     }
                 }
             }
             else {
-                for (auto& e : edges) {
-                    if (e->getDest()->getId() == order.at(i+1)) {
+                for (auto &e: edges) {
+                    if (e->getDest()->getId() == getVertexSet().at(order.at(i+1))->getId()) {
                         distance += e->getDistance();
+                    //    std::cout << e->getDest()->getId() << " com distancia: " << distance << std::endl;
                     }
                 }
             }
+            if (distance == prevDistance) {
+                validPath = false;
+            }
         }
 
-        if (distance < minDistance) {
+        //std::cout << "VP: " << validPath << std::endl;
+        if (distance < minDistance && validPath) {
             minDistance = distance;
+            std::cout << distance << std::endl;
             path.clear();
             for (int i = 0; i < order.size(); i++) {
-                path.push_back(order.at(i));
+                path.push_back(getVertexSet().at(order.at(i))->getId());
+                std::cout << getVertexSet().at(order.at(i))->getId() << " ";
             }
+            std::cout << std::endl;
         }
     } while (std::next_permutation(order.begin() + 1, order.end()));
 

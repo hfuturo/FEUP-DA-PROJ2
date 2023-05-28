@@ -4,7 +4,7 @@
 
 int main() {
     Graph graph;
-    graph.fill(TOY_GRAPH_STADIUMS);
+    graph.fill(TOY_GRAPH_SHIPPING);
     graph.tspBF();
 /*
     for (auto& v : graph.getVertexSet()) {
