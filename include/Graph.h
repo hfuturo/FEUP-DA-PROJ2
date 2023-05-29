@@ -94,8 +94,32 @@ public:
 
      /**
       * @brief Finds the preOrder of a graph
+      *
+      * @return Vector with vertices in pre-order
       */
-     void preOrder();
+     std::vector<Vertex*> preOrder();
+
+     /**
+      * @brief Executes an approximation algorithm for TSP
+      */
+     void approximation();
+
+     /**
+      * @brief Calculates the distance between two vertices using their latitude and longitude
+      *
+      * @param v1 The first vertex
+      * @param v2 The second vertex
+      * @return The distance between these vertices
+      */
+     double haversine(Vertex* v1, Vertex* v2);
+
+     /**
+      * @brief Converts a coordinate to radians
+      *
+      * @param coord The coordinate
+      * @return The coordinate in radians
+      */
+     double convert_to_rads(double coord);
 };
 
 #endif //DA_PROJ2_GRAPH_H

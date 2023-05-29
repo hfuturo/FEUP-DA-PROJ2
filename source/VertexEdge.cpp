@@ -2,9 +2,10 @@
 
 /********************************** Vertex **********************************/
 
-Vertex::Vertex(const int id): id(id), distance(0), visited(false), path(nullptr)  {}
+Vertex::Vertex(const int id): id(id), distance(0), visited(false), path(nullptr), longitude(0), latitude(0), queueIndex(0)  {}
 
-Vertex::Vertex(const int id, std::string &name): id(id), name(name), distance(0), visited(false), path(nullptr) {}
+Vertex::Vertex(const int id, const double longitude, const double latitude): id(id), longitude(longitude), latitude(latitude),
+    distance(0), visited(false), path(nullptr), queueIndex(0) {}
 
 int Vertex::getId() const {
     return this->id;
@@ -12,6 +13,22 @@ int Vertex::getId() const {
 
 void Vertex::setId(const int id) {
     this->id = id;
+}
+
+double Vertex::getLongitude() const {
+    return this->longitude;
+}
+
+void Vertex::setLongitude(double longitude) {
+    this->longitude = longitude;
+}
+
+double Vertex::getLatitude() const {
+    return this->latitude;
+}
+
+void Vertex::setLatitude(double latitude) {
+    this->latitude = latitude;
 }
 
 std::vector<Edge *> Vertex::getAdj() const {

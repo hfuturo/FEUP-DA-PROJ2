@@ -3,10 +3,13 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 #include "../include/Graph.h"
 #include "../include/MutablePriorityQueue.h"
 #include "../include/VertexEdge.h"
+#include "../include/constants.h"
+
 
 Graph::Graph() {}
 
@@ -44,7 +47,7 @@ void Graph::readVertices(const std::string& path) {
     if (file.fail()) return;
 
     int count = 0;
-    std::string id, dest, name, destName, distance, fileLine, trash;
+    std::string id, dest, distance, fileLine, trash;
 
     getline(file, fileLine);
     std::stringstream ssTrash(fileLine);
@@ -57,8 +60,8 @@ void Graph::readVertices(const std::string& path) {
         getline(ss, dest, ',');
         getline(ss, distance, ',');
         if (count == 5) {
-            getline(ss, name, ',');
-            getline(ss, destName);
+            getline(ss, trash, ',');
+            getline(ss, trash);
         }
         if (findVertex(std::stoi(id)) == nullptr) addVertex(std::stoi(id));
         if (findVertex(std::stoi(dest)) == nullptr) addVertex(std::stoi(dest));
@@ -169,7 +172,8 @@ void Graph::prim() {
         v->setPath(nullptr);
     }
 
-    std::sort(vertexSet.begin(), vertexSet.end());
+    // possivel melhoria -> em vez de fazer sort (nlogn) percorrer vetor (n)
+    std::sort(vertexSet.begin(), vertexSet.end(), [](Vertex* v1, Vertex*v2) {return v1->getId() < v2->getId();});
 
     Vertex* root = getVertexSet().front();
     root->setDistance(0);
@@ -192,6 +196,11 @@ void Graph::prim() {
             }
         }
     }
+
+    for (auto& v  :getVertexSet()) {
+        if (v->getPath()) std::cout << v->getPath()->getOrigin()->getId() << "->" << v->getId() << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 void Graph::dfsPreOrder(Vertex *vertex, std::vector<Vertex *> &preOrder) {
@@ -205,7 +214,7 @@ void Graph::dfsPreOrder(Vertex *vertex, std::vector<Vertex *> &preOrder) {
     }
 }
 
-void Graph::preOrder() {
+std::vector<Vertex*> Graph::preOrder() {
     for (auto& v : getVertexSet()) {
         v->setVisited(false);
     }
@@ -214,7 +223,68 @@ void Graph::preOrder() {
 
     dfsPreOrder(getVertexSet().front(), order);
 
+    return order;
+}
+
+void Graph::approximation() {
+    prim();
+    std::vector<Vertex*> order = preOrder();
+    double distance = 0;
+
+    for (int i = 0; i < order.size(); i++) {
+        auto v = order.at(i);
+        double prevDistance = distance;
+        for (auto& e : v->getAdj()) {
+            if (i == order.size() - 1) {
+                if (e->getDest()->getId() == 0) {
+                    distance += e->getDistance();
+                }
+            }
+            else {
+                if (e->getDest()->getId() == order.at(i + 1)->getId()) {
+                    distance += e->getDistance();
+                }
+            }
+        }
+        if (prevDistance == distance) {
+            distance += i == order.size() - 1 ? haversine(v, findVertex(0)) : haversine(v, order.at(i+1));
+            std::cout << "USED HAVERSINE\n\t" << v->getId();
+            if (i ==order.size() - 1) {
+                std::cout << " to 0 with distance: " << haversine(v, findVertex(0)) << "\n";
+            }
+            else {
+                std::cout << " to " << order.at(i+1)->getId() << " with distance: " << haversine(v, order.at(i+1))<< std::endl;
+            }
+        }
+    }
+
     for (auto& v : order) {
         std::cout << v->getId() << " ";
     }
+
+    std::cout << std::endl;
+    std::cout << distance << std::endl;
+}
+
+double Graph::haversine(Vertex *v1, Vertex *v2) {
+    if (!v1 || !v2) return -1;
+
+    double rad_lon1 = convert_to_rads(v1->getLongitude());
+    double rad_lat1 = convert_to_rads(v1->getLatitude());
+    double rad_lon2 = convert_to_rads(v2->getLongitude());
+    double rad_lat2 = convert_to_rads(v2->getLatitude());
+
+    double delta_lat = rad_lat2 - rad_lat1;
+    double delta_lon = rad_lon2 - rad_lon1;
+
+    double aux = std::pow(std::sin(delta_lat / 2), 2) + std::cos(rad_lat1) *
+                    std::cos(rad_lat2) * std::pow(std::sin(delta_lon / 2), 2);
+
+    double c = 2.0 * std::atan2(std::sqrt(aux), std::sqrt(1.0 - aux));
+    double distance = EARTH_RADIUS * c;
+    return distance;
+}
+
+double Graph::convert_to_rads(double coord) {
+    return coord * M_PI / 180;
 }

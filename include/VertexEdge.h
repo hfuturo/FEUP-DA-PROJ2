@@ -16,9 +16,14 @@ private:
     int id;
 
     /**
-     * @brief The name of the vertex
+     * @brief The longitude of the vertex.
      */
-    std::string name;
+    double longitude;
+
+    /**
+     * @brief The latitude of the vertex.
+     */
+    double latitude;
 
     /**
      * @brief A vector with the outgoing edges.
@@ -49,17 +54,22 @@ public:
     /**
      * @brief Constructor that initializes a vertex with id.
      *
+     * @note Used for Toy-graphs
+     *
      * @param id The vertex id.
      */
     Vertex(const int id);
 
     /**
-     * @brief Constructor that initializes a vertex with id and name.
+     * @brief Constructor that initializes a vertex with id, longitude and latitude.
      *
-     * @param id The vertex id.
-     * @param name The vertex name.
+     * @note Used for Real-world Graphs
+     *
+     * @param id The id
+     * @param longitude The longitude
+     * @param latitude The latitude
      */
-    Vertex(const int id, std::string& name);
+    Vertex(const int id, const double longitude, const double latitude);
 
     /**
      * @brief Returns the id of a vertex.
@@ -74,6 +84,34 @@ public:
      * @param id The new vertex id.
      */
     void setId(const int id);
+
+    /**
+     * @brief Return the longitude of the vertex
+     *
+     * @return The longitude
+     */
+    double getLongitude() const;
+
+    /**
+     * @brief Sets the longitude of this vertex
+     *
+     * @param longitude The longitude
+     */
+    void setLongitude(double longitude);
+
+    /**
+     * @brief Returns the latitude of the vertex
+     *
+     * @return The latitude
+     */
+    double getLatitude() const;
+
+    /**
+     * @brief Sets the latitude of this vertex
+     *
+     * @param latitude The latitude
+     */
+    void setLatitude(double latitude);
 
     /**
      * @brief Sees if a vertex has benn visited.
@@ -186,13 +224,15 @@ private:
      double distance;
 
      /**
-      * @brief The edge that connects the destination station to this station
+      * @brief The edge that connects the destination station to this station.
       */
      Edge* reverse;
 
 public:
     /**
      * @brief Constructor that initializes an edge.
+     *
+     * @note Used for all graphs.
      *
      * @param origin The origin of the edge.
      * @param dest The destinations of the edge.
