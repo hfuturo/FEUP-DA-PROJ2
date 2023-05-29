@@ -90,7 +90,12 @@ public:
      /**
       * @brief Executes Depth First Search (DFS) algorithm to compute pre-order of graph
       */
-     void dfs(Vertex* v, std::vector<Vertex*>& preOrder);
+     void dfsPreOrder(Vertex* vertex, std::vector<Vertex*>& preOrder);
+
+     /**
+      * @brief Finds the preOrder of a graph
+      */
+     void preOrder();
 };
 
 #endif //DA_PROJ2_GRAPH_H
