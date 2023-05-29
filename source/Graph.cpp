@@ -193,3 +193,14 @@ void Graph::prim() {
         }
     }
 }
+
+void Graph::dfs(Vertex* vertex, std::vector<Vertex *> &preOrder) {
+    preOrder.push_back(vertex);
+    vertex->setVisited(true);
+
+    for (auto& v : getVertexSet()) {
+        if (v->getPath() && v->getPath()->getOrigin()->getId() == vertex->getId() && !v->isVisited()) {
+            dfs(v, preOrder);
+        }
+    }
+}

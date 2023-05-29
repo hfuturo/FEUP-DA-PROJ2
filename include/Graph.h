@@ -78,7 +78,7 @@ public:
      /**
       * @brief Performs a brute force algorithm to finds the tsp of a graph
       *
-      * @note Complexity time: O(n*n!)
+      * @note Complexity time: O(V*V!)
       */
      void tspBF();
 
@@ -86,6 +86,11 @@ public:
       * @brief Executes prim's algorithm to compute MST
       */
      void prim();
+
+     /**
+      * @brief Executes Depth First Search (DFS) algorithm to compute pre-order of graph
+      */
+     void dfs(Vertex* v, std::vector<Vertex*>& preOrder);
 };
 
 #endif //DA_PROJ2_GRAPH_H
