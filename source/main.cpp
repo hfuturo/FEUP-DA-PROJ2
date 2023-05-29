@@ -4,14 +4,13 @@
 
 int main() {
     Graph graph;
-    graph.fill(TOY_GRAPH_SHIPPING);
-    graph.tspBF();
-/*
+    graph.fill(TOY_GRAPH_STADIUMS);
+    graph.prim();
+
     for (auto& v : graph.getVertexSet()) {
-        std::cout << v->getId() << " : " << "\n\t";
-        for (auto&e : v->getAdj()) {
-            std::cout << e->getDest()->getId() <<  " ";
+        if (v->getPath()) {
+            std::cout << v->getPath()->getOrigin()->getId();
         }
-        std::cout << std::endl;
-    } */
+        std::cout << " -> " << v->getId() << std::endl;
+    }
 }

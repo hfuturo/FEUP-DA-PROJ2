@@ -30,6 +30,21 @@ private:
      */
     std::vector<Edge*> incoming;
 
+    /**
+     * @brief Vertex already been visited
+     */
+    bool visited;
+
+    /**
+     * @brief The distance it takes to get to this vertex.
+     */
+    double distance;
+
+    /**
+     * @brief Edge that connects this vertex to the previous one
+     */
+    Edge* path;
+
 public:
     /**
      * @brief Constructor that initializes a vertex with id.
@@ -41,8 +56,8 @@ public:
     /**
      * @brief Constructor that initializes a vertex with id and name.
      *
-     * @param id
-     * @param name
+     * @param id The vertex id.
+     * @param name The vertex name.
      */
     Vertex(const int id, std::string& name);
 
@@ -59,6 +74,48 @@ public:
      * @param id The new vertex id.
      */
     void setId(const int id);
+
+    /**
+     * @brief Sees if a vertex has benn visited.
+     *
+     * @return True if visited, False otherwise.
+     */
+    bool isVisited() const;
+
+    /**
+     * @brief Sets a vertex as visited or not.
+     *
+     * @param visited The visited attribute.
+     */
+    void setVisited(bool visited);
+
+    /**
+     * @brief Gets the distance it takes to get to this vertex.
+     *
+     * @return The distance.
+     */
+    double getDistance() const;
+
+    /**
+     * @brief Sets the distance it takes to get to this vertex.
+     *
+     * @param distance The distance.
+     */
+    void setDistance(double distance);
+
+    /**
+     * @brief Gets the edge that connects this vertex to the previous one.
+     *
+     * @return The Edge if the Vertex is connected. nullptr otherwise.
+     */
+    Edge* getPath() const;
+
+    /**
+     * @brief Sets the edge that connects this vertex to the previous one.
+     *
+     * @param path The edge that connects this vertex to the previous one.
+     */
+    void setPath(Edge* path);
 
     /**
      * @brief Connects two vertices by adding an edge.
@@ -89,6 +146,20 @@ public:
      */
     std::vector<Edge*> getIncoming() const;
 
+    /**
+     * @brief Compares this vertex's cost to another vertex's cost.
+     *
+     * @note Complexity time: O(1).
+     *
+     * @param vertex The another vertex that we are goingo to comapre with.
+     * @return True if this vertex's cost is fewer than the other vertex's cost. False otherwise.
+     */
+    bool operator<(Vertex& vertex) const;
+
+    /**
+    * @brief Index of this vertex in Priority Queue. Need for Prim.
+    */
+    int queueIndex;
 };
 
 

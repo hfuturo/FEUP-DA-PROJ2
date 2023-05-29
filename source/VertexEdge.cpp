@@ -2,9 +2,9 @@
 
 /********************************** Vertex **********************************/
 
-Vertex::Vertex(const int id): id(id) {}
+Vertex::Vertex(const int id): id(id), distance(0), visited(false), path(nullptr)  {}
 
-Vertex::Vertex(const int id, std::string &name): id(id), name(name) {}
+Vertex::Vertex(const int id, std::string &name): id(id), name(name), distance(0), visited(false), path(nullptr) {}
 
 int Vertex::getId() const {
     return this->id;
@@ -20,6 +20,34 @@ std::vector<Edge *> Vertex::getAdj() const {
 
 std::vector<Edge *> Vertex::getIncoming() const {
     return this->incoming;
+}
+
+double Vertex::getDistance() const {
+    return this->distance;
+}
+
+void Vertex::setDistance(double distance) {
+    this->distance = distance;
+}
+
+bool Vertex::isVisited() const {
+    return this->visited;
+}
+
+void Vertex::setVisited(bool visited) {
+    this->visited = visited;
+}
+
+Edge *Vertex::getPath() const {
+    return this->path;
+}
+
+void Vertex::setPath(Edge *path) {
+    this->path = path;
+}
+
+bool Vertex::operator<(Vertex &vertex) const {
+    return this->distance < vertex.getDistance();
 }
 
 Edge *Vertex::addEdge(Vertex *dest, const double distance) {

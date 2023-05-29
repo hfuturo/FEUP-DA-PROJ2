@@ -81,6 +81,11 @@ public:
       * @note Complexity time: O(n*n!)
       */
      void tspBF();
+
+     /**
+      * @brief Executes prim's algorithm to compute MST
+      */
+     void prim();
 };
 
 #endif //DA_PROJ2_GRAPH_H

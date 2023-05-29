@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "../include/Graph.h"
+#include "../include/MutablePriorityQueue.h"
 #include "../include/VertexEdge.h"
 
 Graph::Graph() {}
@@ -159,4 +160,36 @@ void Graph::tspBF() {
 void Graph::fill(const std::string& path) {
     readVertices(path);
     readEdges(path);
+}
+
+void Graph::prim() {
+    for (auto& v : getVertexSet()) {
+        v->setVisited(false);
+        v->setDistance(INT_MAX);
+        v->setPath(nullptr);
+    }
+
+    std::sort(vertexSet.begin(), vertexSet.end());
+
+    Vertex* root = getVertexSet().front();
+    root->setDistance(0);
+
+    MutablePriorityQueue<Vertex> q;
+
+    for (auto& v : getVertexSet()) {
+        q.insert(v);
+    }
+
+    while (!q.empty()) {
+        Vertex* vertex = q.extractMin();
+        vertex->setVisited(true);
+        for (auto& e : vertex->getAdj()) {
+            Vertex* neighbor = e->getDest();
+            if (!neighbor->isVisited() && e->getDistance() < neighbor->getDistance()) {
+                neighbor->setPath(e);
+                neighbor->setDistance(e->getDistance());
+                q.decreaseKey(neighbor);
+            }
+        }
+    }
 }
