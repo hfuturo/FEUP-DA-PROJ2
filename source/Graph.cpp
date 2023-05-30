@@ -117,60 +117,6 @@ void Graph::readEdges(const std::string &path) {
 
 }
 
-double Graph::tspBF(std::vector<int>& path) {
-    if (getVertexSet().empty()) return -1;
-
-    std::cout << "calculating ...\n\n";
-
-    double minDistance = INF;
-    std::vector<int> order;
-
-    for (int i = 0; i < getVertexSet().size(); i++) {
-        order.push_back(i);
-    }
-
-    std::sort(order.begin(), order.end());
-    do {
-        bool validPath = true;
-        double distance = 0;
-
-        for (int i = 0; i < getVertexSet().size(); i++) {
-            auto edges = getVertexSet().at(order.at(i))->getAdj();
-            auto prevDistance = distance;
-
-            if (i == getVertexSet().size() - 1) {
-                for (auto& e : edges) {
-                    if (e->getDest()->getId() == 0) {
-                        distance += e->getDistance();
-                    }
-                }
-            }
-            else {
-                for (auto &e: edges) {
-                    if (e->getDest()->getId() == getVertexSet().at(order.at(i+1))->getId()) {
-                        distance += e->getDistance();
-                    }
-                }
-            }
-            if (distance == prevDistance || distance >= minDistance) {
-                validPath = false;
-                break;
-            }
-        }
-
-        if (distance < minDistance && validPath) {
-            minDistance = distance;
-            path.clear();
-
-            for (int i = 0; i < order.size(); i++) {
-                path.push_back(getVertexSet().at(order.at(i))->getId());
-            }
-        }
-    } while (std::next_permutation(order.begin() + 1, order.end()));
-
-    return minDistance;
-}
-
 void Graph::fill(const std::string& path, bool isRealGraph) {
     if (isRealGraph) {
         readVertices(path + "/nodes.csv", true);
@@ -301,12 +247,11 @@ double Graph::convert_to_rads(double coord) {
 }
 
 void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned int count, std::vector<int> &path) {
-    //vertex->setVisited(true);
-    std::cout << "COUNT: " << count << std::endl;
+    if (distance >= minDist) return;
+
     if (count == getVertexSet().size() - 1) {
         for (auto& e : vertex->getAdj()) {
             if (e->getDest()->getId() == 0) {
-                std::cout << "ENTRA MINDIST\n";
                 minDist = std::min(minDist, distance + e->getDistance());
                 return;
             }
@@ -316,12 +261,10 @@ void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned
     for (auto& e : vertex->getAdj()) {
         if (!e->getDest()->isVisited()) {
             e->getDest()->setVisited(true);
-            std::cout << "ENTRA " << vertex->getId() << " -> " << e->getDest()->getId() << " com dest= " << distance << " e min= " << minDist << std::endl;
             tspBTRec(e->getDest(), minDist, distance + e->getDistance(), count + 1, path);
             e->getDest()->setVisited(false);
         }
     }
-
 }
 
 double Graph::tspBT(std::vector<int> &path) {
@@ -335,5 +278,6 @@ double Graph::tspBT(std::vector<int> &path) {
     auto root = getVertexSet().front();
     root->setVisited(true);
     tspBTRec(root, minDist, distance, count, path);
-    std::cout << minDist << std::endl;
+
+    return minDist;
 }

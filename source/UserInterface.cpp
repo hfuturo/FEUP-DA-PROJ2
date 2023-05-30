@@ -115,8 +115,7 @@ void UserInterface::showMenu() {
                 std::cout << "*** Backtracking Algorithm ***\n\n";
 
                 std::vector<int> path;
-                //double distance = graph.tspBF(path);
-                graph.tspBT(path);
+                double distance = graph.tspBT(path);
 
                 bool first = true;
                 for (auto& v : path) {
@@ -128,8 +127,9 @@ void UserInterface::showMenu() {
                         std::cout << " -> " << v;
                     }
                 }
+
                 std::cout << std::endl;
-              //  std::cout << "Distance: " << distance << std::endl << std::endl;
+                std::cout << "Distance: " << distance << std::endl << std::endl;
 
                 break;
             }
@@ -194,7 +194,7 @@ void UserInterface::showMenu() {
                 switch (userchoice2) {
                     case '1': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBF(backtrackingPath);
+                        graph.tspBT(backtrackingPath);
                         auto tEndBStartA = std::chrono::high_resolution_clock::now();
                         graph.approximation(approximationPath);
                         auto tEndA = std::chrono::high_resolution_clock::now();
@@ -210,7 +210,7 @@ void UserInterface::showMenu() {
 
                     case '2': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBF(backtrackingPath);
+                        graph.tspBT(backtrackingPath);
                         auto tEndBStartA = std::chrono::high_resolution_clock::now();
                         graph.approximation(approximationPath);
                         auto tEndA = std::chrono::high_resolution_clock::now();
@@ -227,7 +227,7 @@ void UserInterface::showMenu() {
                     //TODO: Implement time for other heuristics
                     case '3': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBF(backtrackingPath);
+                        graph.tspBT(backtrackingPath);
                         auto tEndBStartOH = std::chrono::high_resolution_clock::now();
                         // TODO:: CHAMAR OTHER HEURISTICS FUNCTION
                         auto tEndOH = std::chrono::high_resolution_clock::now();

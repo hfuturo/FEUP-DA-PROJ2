@@ -88,11 +88,24 @@ public:
      void readEdges(const std::string& path);
 
      /**
-      * @brief Performs a brute force algorithm to finds the tsp of a graph
+      * @brief Does the recursive work of tspBT
       *
-      * @note Complexity time: O(V*V!)
+      * @param vertex The root of the TSP problem
+      * @param minDist The minimal distance of the TSP problem
+      * @param distance The current distance of the TSP
+      * @param count The number of the nodes visited in the current path
+      * @param path The current path
       */
-     double tspBF(std::vector<int>& path);
+     void tspBTRec(Vertex* vertex, double& minDist, double distance, unsigned int count, std::vector<int>& path);
+
+     /**
+      * @brief Executes a backtracking algorithm to solve the TSP problem.
+      *
+      * @param path The path of nodes corresponding to the minimal distance.
+      *
+      * @return The minimal distance.
+      */
+     double tspBT(std::vector<int>& path);
 
      /**
       * @brief Executes prim's algorithm to compute MST
@@ -135,9 +148,6 @@ public:
       */
      double convert_to_rads(double coord);
 
-     void tspBTRec(Vertex* vertex, double& minDist, double distance, unsigned int count, std::vector<int>& path);
-
-     double tspBT(std::vector<int>& path);
 };
 
 #endif //DA_PROJ2_GRAPH_H
