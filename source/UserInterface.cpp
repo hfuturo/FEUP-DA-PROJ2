@@ -115,8 +115,8 @@ void UserInterface::showMenu() {
                 std::cout << "*** Backtracking Algorithm ***\n\n";
 
                 std::vector<int> path;
-                double distance = graph.tspBF(path);
-             //   graph.tspBT(path);
+                //double distance = graph.tspBF(path);
+                graph.tspBT(path);
 
                 bool first = true;
                 for (auto& v : path) {
@@ -129,7 +129,7 @@ void UserInterface::showMenu() {
                     }
                 }
                 std::cout << std::endl;
-                std::cout << "Distance: " << distance << std::endl << std::endl;
+              //  std::cout << "Distance: " << distance << std::endl << std::endl;
 
                 break;
             }

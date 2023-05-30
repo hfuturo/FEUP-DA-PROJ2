@@ -135,10 +135,9 @@ public:
       */
      double convert_to_rads(double coord);
 
- /*
-     void tspBTRec(unsigned int curIndex, double curDist, std::vector<int>& currPath, double& minDist, std::vector<int>& path);
+     void tspBTRec(Vertex* vertex, double& minDist, double distance, unsigned int count, std::vector<int>& path);
 
-     double tspBT(std::vector<int>& path); */
+     double tspBT(std::vector<int>& path);
 };
 
 #endif //DA_PROJ2_GRAPH_H
