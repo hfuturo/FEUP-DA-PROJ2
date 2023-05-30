@@ -3,10 +3,16 @@
 
 #include <vector>
 #include <string>
+#include <limits>
 
 class Edge;
 
 /*************************************** Vertex ***************************************/
+
+/**
+ * @brief Represents the maximum number representable by a double.
+ */
+#define INF std::numeric_limits<double>::max()
 
 class Vertex {
 private:

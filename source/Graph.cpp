@@ -22,6 +22,11 @@ bool Graph::addVertex(const int id) {
     return true;
 }
 
+bool Graph::addVertexRealGraph(const int id, const double longitude, const double latitude) {
+    vertexSet.push_back(new Vertex(id, longitude, latitude));
+    return true;
+}
+
 Vertex *Graph::findVertex(const int id) const {
     for (auto &v: getVertexSet())
         if (v->getId() == id) return v;
@@ -41,30 +46,42 @@ bool Graph::addBidirectionalEdge(const int origin, const int dest, const double 
     return true;
 }
 
-void Graph::readVertices(const std::string& path) {
+void Graph::readVertices(const std::string& path, bool isRealGraph) {
     std::ifstream file(path);
 
     if (file.fail()) return;
 
     int count = 0;
-    std::string id, dest, distance, fileLine, trash;
+    std::string id, dest, distance, longitude, latitude, fileLine, trash;
 
     getline(file, fileLine);
     std::stringstream ssTrash(fileLine);
 
     while (getline(ssTrash, trash, ',')) count ++;
 
-    while (getline(file, fileLine)) {
-        std::stringstream ss(fileLine);
-        getline(ss, id, ',');
-        getline(ss, dest, ',');
-        getline(ss, distance, ',');
-        if (count == 5) {
-            getline(ss, trash, ',');
-            getline(ss, trash);
+    if (isRealGraph) {
+        while (getline(file, fileLine)) {
+            std::stringstream ss(fileLine);
+            getline(ss, id, ',');
+            getline(ss, longitude, ',');
+            getline(ss, latitude);
+            if (findVertex(std::stoi(id)) == nullptr)
+                addVertexRealGraph(std::stoi(id), std::stod(longitude), std::stod(latitude));
         }
-        if (findVertex(std::stoi(id)) == nullptr) addVertex(std::stoi(id));
-        if (findVertex(std::stoi(dest)) == nullptr) addVertex(std::stoi(dest));
+    }
+    else {
+        while (getline(file, fileLine)) {
+            std::stringstream ss(fileLine);
+            getline(ss, id, ',');
+            getline(ss, dest, ',');
+            getline(ss, distance, ',');
+            if (count == 5) {
+                getline(ss, trash, ',');
+                getline(ss, trash);
+            }
+            if (findVertex(std::stoi(id)) == nullptr) addVertex(std::stoi(id));
+            if (findVertex(std::stoi(dest)) == nullptr) addVertex(std::stoi(dest));
+        }
     }
 }
 
@@ -96,12 +113,12 @@ void Graph::readEdges(const std::string &path) {
 
 }
 
-void Graph::tspBF() {
-    if (getVertexSet().empty()) return;
-    std::cout << "calculating ...\n";
-    double minDistance = INT_MAX;
+double Graph::tspBF(std::vector<int>& path) {
+    if (getVertexSet().empty()) return -1;
 
-    std::vector<int> path;
+    std::cout << "calculating ...\n\n";
+
+    double minDistance = INF;
     std::vector<int> order;
 
     for (int i = 0; i < getVertexSet().size(); i++) {
@@ -112,10 +129,8 @@ void Graph::tspBF() {
     do {
         bool validPath = true;
         double distance = 0;
-      //  std::cout << "NEW" << std::endl;
+
         for (int i = 0; i < getVertexSet().size(); i++) {
-           // std::cout << getVertexSet().at(order.at(i))->getId() << std::endl;
-          //  std::cout << "\tTO: ";
             auto edges = getVertexSet().at(order.at(i))->getAdj();
             auto prevDistance = distance;
 
@@ -123,7 +138,6 @@ void Graph::tspBF() {
                 for (auto& e : edges) {
                     if (e->getDest()->getId() == 0) {
                         distance += e->getDistance();
-                    //    std::cout << " 0 com distancia: " << distance << std::endl;
                     }
                 }
             }
@@ -131,41 +145,35 @@ void Graph::tspBF() {
                 for (auto &e: edges) {
                     if (e->getDest()->getId() == getVertexSet().at(order.at(i+1))->getId()) {
                         distance += e->getDistance();
-                    //    std::cout << e->getDest()->getId() << " com distancia: " << distance << std::endl;
                     }
                 }
             }
-            if (distance == prevDistance) {
+            if (distance == prevDistance || distance >= minDistance) {
                 validPath = false;
+                break;
             }
         }
 
-        //std::cout << "VP: " << validPath << std::endl;
         if (distance < minDistance && validPath) {
             minDistance = distance;
-            std::cout << distance << std::endl;
             path.clear();
+
             for (int i = 0; i < order.size(); i++) {
                 path.push_back(getVertexSet().at(order.at(i))->getId());
-                std::cout << getVertexSet().at(order.at(i))->getId() << " ";
             }
-            std::cout << std::endl;
         }
     } while (std::next_permutation(order.begin() + 1, order.end()));
 
-
-    for (int i = 0; i < path.size(); i++) {
-        std::cout << path.at(i) << " ";
-    }
-    std::cout << minDistance << std::endl;
+    return minDistance;
 }
 
 void Graph::fill(const std::string& path, bool isRealGraph) {
     if (isRealGraph) {
-
+        readVertices(path + "/nodes.csv", true);
+        readEdges(path + "/edges.csv");
     }
     else {
-        readVertices(path);
+        readVertices(path, isRealGraph);
         readEdges(path);
     }
 }
@@ -173,7 +181,7 @@ void Graph::fill(const std::string& path, bool isRealGraph) {
 void Graph::prim() {
     for (auto& v : getVertexSet()) {
         v->setVisited(false);
-        v->setDistance(INT_MAX);
+        v->setDistance(INF);
         v->setPath(nullptr);
     }
 
@@ -230,46 +238,39 @@ std::vector<Vertex*> Graph::preOrder() {
     return order;
 }
 
-void Graph::approximation() {
+double Graph::approximation(std::vector<Vertex*>& path) {
     prim();
-    std::vector<Vertex*> order = preOrder();
+    path = preOrder();
     double distance = 0;
 
-    for (int i = 0; i < order.size(); i++) {
-        auto v = order.at(i);
+    for (int i = 0; i < path.size(); i++) {
+        auto v = path.at(i);
         double prevDistance = distance;
         for (auto& e : v->getAdj()) {
-            if (i == order.size() - 1) {
+            if (i == path.size() - 1) {
                 if (e->getDest()->getId() == 0) {
                     distance += e->getDistance();
                 }
             }
             else {
-                if (e->getDest()->getId() == order.at(i + 1)->getId()) {
+                if (e->getDest()->getId() == path.at(i + 1)->getId()) {
                     distance += e->getDistance();
                 }
             }
         }
         if (prevDistance == distance) {
-            distance += i == order.size() - 1 ? haversine(v, findVertex(0)) : haversine(v, order.at(i+1));
+            distance += i == path.size() - 1 ? haversine(v, findVertex(0)) : haversine(v, path.at(i+1));
             std::cout << "USED HAVERSINE\n\t" << v->getId();
-            if (i ==order.size() - 1) {
+            if (i == path.size() - 1) {
                 std::cout << " to 0 with distance: " << haversine(v, findVertex(0)) << "\n";
             }
             else {
-                std::cout << " to " << order.at(i+1)->getId() << " with distance: " << haversine(v, order.at(i+1))<< std::endl;
+                std::cout << " to " << path.at(i+1)->getId() << " with distance: " << haversine(v, path.at(i+1))<< std::endl;
             }
         }
     }
 
-    std::cout << std::endl;
-
-    for (auto& v : order) {
-        std::cout << v->getId() << " ";
-    }
-
-    std::cout << std::endl;
-    std::cout << distance << std::endl;
+    return distance;
 }
 
 double Graph::haversine(Vertex *v1, Vertex *v2) {
@@ -294,3 +295,54 @@ double Graph::haversine(Vertex *v1, Vertex *v2) {
 double Graph::convert_to_rads(double coord) {
     return coord * M_PI / 180;
 }
+
+/*
+void Graph::tspBTRec(unsigned int curIndex, double curDist, std::vector<int>& currPath, double &minDist,
+                     std::vector<int>& path) {
+    if (curIndex == getVertexSet().size()) {
+        auto vertex = getVertexSet().at(currPath.at(getVertexSet().size() - 1));
+        for (auto& e : vertex->getAdj()) {
+            if (e->getDest()->getId() == 0) {
+                if (curDist < minDist) {
+                    path.clear();
+                    std::cout << "size: " << currPath.size() << std::endl;
+                    for (auto v : currPath) {
+                        path.push_back(v);
+                        std::cout << v << std::endl;
+                    }
+                }
+                //currPath.clear();
+                //currPath.push_back(0);
+                return;
+            }
+        }
+    }
+
+    auto vertex = getVertexSet().at(currPath.at(curIndex - 1));
+    for (auto e : vertex->getAdj()) {
+        if (curDist + e->getDistance() < minDist) {
+            bool isNewVertex = true;
+            for (unsigned  int j = 1; j < curIndex; j++) {
+                if (currPath.at(j) == e->getDest()->getId()) {
+                    isNewVertex = false;
+                    break;
+                }
+            }
+            if (isNewVertex) {
+                currPath.push_back(e->getDest()->getId());
+                tspBTRec(curIndex + 1, curDist + e->getDistance(), currPath, minDist, path);
+            }
+        }
+    }
+}
+
+double Graph::tspBT(std::vector<int>& path) {
+    double minDist = INF;
+    std::vector<int> currPath;
+    currPath.push_back(0);
+    tspBTRec(1, 0, currPath, minDist, path);
+
+    for (auto v : path) {
+        std::cout << v << std::endl;
+    }
+} */

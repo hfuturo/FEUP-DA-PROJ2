@@ -2,6 +2,7 @@
 #define DA_PROJ2_GRAPH_H
 
 #include <vector>
+#include <unordered_map>
 
 #include "../include/VertexEdge.h"
 
@@ -32,6 +33,17 @@ public:
       * @return False otherwise.
       */
      bool addVertex(const int id);
+
+     /**
+      * @brief Adds a vertex in info from a real graph
+      *
+      * @param id The vertex id
+      * @param longitude The longitude of the vertex
+      * @param latitude The latitude of the vertex
+      * @return True if the vertex was successfully added.
+      * @return False otherwise.
+      */
+      bool addVertexRealGraph(const int id, const double longitude, const double latitude);
 
      /**
       * @brief Adds an edge to the graph.
@@ -66,7 +78,7 @@ public:
       *
       * @note Complexity time: O(V)
       */
-     void readVertices(const std::string& path);
+     void readVertices(const std::string& path, bool isRealGraph);
 
      /**
       * @brief Reads the edges from the file and adds them into the graph.
@@ -80,7 +92,7 @@ public:
       *
       * @note Complexity time: O(V*V!)
       */
-     void tspBF();
+     double tspBF(std::vector<int>& path);
 
      /**
       * @brief Executes prim's algorithm to compute MST
@@ -101,8 +113,10 @@ public:
 
      /**
       * @brief Executes an approximation algorithm for TSP
+      *
+      * @return The approximation value.
       */
-     void approximation();
+     double approximation(std::vector<Vertex*>& path);
 
      /**
       * @brief Calculates the distance between two vertices using their latitude and longitude
@@ -120,6 +134,11 @@ public:
       * @return The coordinate in radians
       */
      double convert_to_rads(double coord);
+
+ /*
+     void tspBTRec(unsigned int curIndex, double curDist, std::vector<int>& currPath, double& minDist, std::vector<int>& path);
+
+     double tspBT(std::vector<int>& path); */
 };
 
 #endif //DA_PROJ2_GRAPH_H

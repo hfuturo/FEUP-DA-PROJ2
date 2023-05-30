@@ -79,7 +79,6 @@ void UserInterface::showMenu() {
                         break;
                     }
 
-                    //TODO: adicionar metodo para ler real graphs
                     case '3': {
                         std::cout << "Insert the graph you want to use\n";
                         std::cout << "(1 | 2 | 3)\n\n";
@@ -91,7 +90,8 @@ void UserInterface::showMenu() {
                                 break;
                             std::cout << "\nInvalid input.\n\n";
                         }
-
+                        std::cout << "\nReading file...\n";
+                        graph.fill(REAL_WORLD_GRAPHS + file, true);
                         break;
                     }
 
@@ -113,7 +113,24 @@ void UserInterface::showMenu() {
                 }
 
                 std::cout << "*** Backtracking Algorithm ***\n\n";
-                graph.tspBF();
+
+                std::vector<int> path;
+                double distance = graph.tspBF(path);
+             //   graph.tspBT(path);
+
+                bool first = true;
+                for (auto& v : path) {
+                    if (first) {
+                        first = false;
+                        std::cout << v;
+                    }
+                    else {
+                        std::cout << " -> " << v;
+                    }
+                }
+                std::cout << std::endl;
+                std::cout << "Distance: " << distance << std::endl << std::endl;
+
                 break;
             }
 
@@ -124,7 +141,22 @@ void UserInterface::showMenu() {
                 }
 
                 std::cout << "*** Approximation Algorithm ***\n\n";
-                graph.approximation();
+                std::vector<Vertex*> path;
+                double distance = graph.approximation(path);
+                std::cout << "Path:\n\t";
+
+                bool first = true;
+                for (auto& v : path) {
+                    if (first) {
+                        first = false;
+                        std::cout << v->getId();
+                    }
+                    else {
+                        std::cout << " -> " << v->getId();
+                    }
+                }
+                std::cout << std::endl;
+                std::cout << "Distance: " << distance << std::endl << std::endl;
                 break;
             }
 
@@ -156,12 +188,15 @@ void UserInterface::showMenu() {
                 std::cout << std::endl;
                 std::cin.ignore();
 
+                std::vector<Vertex*> approximationPath;
+                std::vector<int> backtrackingPath;
+
                 switch (userchoice2) {
                     case '1': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBF();
+                        graph.tspBF(backtrackingPath);
                         auto tEndBStartA = std::chrono::high_resolution_clock::now();
-                        graph.approximation();
+                        graph.approximation(approximationPath);
                         auto tEndA = std::chrono::high_resolution_clock::now();
 
                         std::chrono::duration<double, std::milli> time_b = tEndBStartA - tStartB;
@@ -175,9 +210,9 @@ void UserInterface::showMenu() {
 
                     case '2': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBF();
+                        graph.tspBF(backtrackingPath);
                         auto tEndBStartA = std::chrono::high_resolution_clock::now();
-                        graph.approximation();
+                        graph.approximation(approximationPath);
                         auto tEndA = std::chrono::high_resolution_clock::now();
 
                         std::chrono::duration<double, std::milli> time_b = tEndBStartA - tStartB;
@@ -192,7 +227,7 @@ void UserInterface::showMenu() {
                     //TODO: Implement time for other heuristics
                     case '3': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBF();
+                        graph.tspBF(backtrackingPath);
                         auto tEndBStartOH = std::chrono::high_resolution_clock::now();
                         // TODO:: CHAMAR OTHER HEURISTICS FUNCTION
                         auto tEndOH = std::chrono::high_resolution_clock::now();
@@ -206,7 +241,7 @@ void UserInterface::showMenu() {
                     //TODO: Implement time for other heuristics
                     case '4': {
                         auto tStartA = std::chrono::high_resolution_clock::now();
-                        graph.approximation();
+                        graph.approximation(approximationPath);
                         auto tEndAStartOH = std::chrono::high_resolution_clock::now();
                         //TODO: CHAMAR OTHER HEURISTICS FUNCTION
                         auto tEndOH = std::chrono::high_resolution_clock::now();

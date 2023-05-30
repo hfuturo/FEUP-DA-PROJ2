@@ -15,11 +15,6 @@
 // TOURISM 0 3 2 1 4
 
 int main() {
- /*   Graph graph {};
-    auto tstart1 = std::chrono::high_resolution_clock::now();
-    auto tend2 = std::chrono::high_resolution_clock::now();
-    // graph.fill(TOY_GRAPH_STADIUMS);
-    graph.approximation(); */
     UserInterface ui {};
     ui.showMenu();
     return 0;

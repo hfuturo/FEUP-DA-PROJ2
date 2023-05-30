@@ -13,7 +13,10 @@ const std::string TOY_GRAPH = "../dataset/Toy-Graphs/";
  */
 const std::string EXTRA_FULLY_CONNECTED_GRAPHS = "../dataset/Extra_Fully_Connected_Graphs/edges_";
 
-//const std::string REAL_WORLD_GRAPHS = "../dataset/Real-world Graphs/graph"
+/**
+ * @brief Where the Real-World Graphs are stored
+ */
+const std::string REAL_WORLD_GRAPHS = "../dataset/Real-world Graphs/graph";
 
 /**
  * @brief Earth radius in meters
