@@ -59,7 +59,7 @@ public:
      *
      * @note Complexity time: O(V^2).
      */
-     void fill(const std::string& path);
+     void fill(const std::string& path, bool isRealGraph);
 
      /**
       * @brief Reads the vertices from the file and adds them to the graph.

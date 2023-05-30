@@ -1,6 +1,9 @@
 #include <iostream>
+#include <chrono>
+
 #include "../include/Graph.h"
 #include "../include/constants.h"
+#include "../include/UserInterface.h"
 
 //               BF        APPROXIMATION
 //  TOURISM:    2600           2600
@@ -15,7 +18,12 @@
 // com order TOURISM 0 3 2 1 4
 
 int main() {
-    Graph graph;
-    graph.fill(EXTRA_FULLY_CONNECTED_GRAPHS + "edges_75.csv");
-    graph.approximation();
+ /*   Graph graph {};
+    auto tstart1 = std::chrono::high_resolution_clock::now();
+    auto tend2 = std::chrono::high_resolution_clock::now();
+    // graph.fill(TOY_GRAPH_STADIUMS);
+    graph.approximation(); */
+    UserInterface ui {};
+    ui.showMenu();
+    return 0;
 }

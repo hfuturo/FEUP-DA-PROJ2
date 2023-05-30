@@ -4,10 +4,10 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <chrono>
 
 #include "../include/Graph.h"
 #include "../include/MutablePriorityQueue.h"
-#include "../include/VertexEdge.h"
 #include "../include/constants.h"
 
 
@@ -160,9 +160,14 @@ void Graph::tspBF() {
     std::cout << minDistance << std::endl;
 }
 
-void Graph::fill(const std::string& path) {
-    readVertices(path);
-    readEdges(path);
+void Graph::fill(const std::string& path, bool isRealGraph) {
+    if (isRealGraph) {
+
+    }
+    else {
+        readVertices(path);
+        readEdges(path);
+    }
 }
 
 void Graph::prim() {
