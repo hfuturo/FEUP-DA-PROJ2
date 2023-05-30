@@ -20,9 +20,4 @@ const std::string EXTRA_FULLY_CONNECTED_GRAPHS = "../dataset/Extra_Fully_Connect
  */
 const double EARTH_RADIUS = 6371000.0;
 
-/**
- * @brief Earth radius in kilometer
- */
-const double EARTH_RADIUS_KM = 6471.0;
-
 #endif //DA_PROJ2_CONSTANTS_H

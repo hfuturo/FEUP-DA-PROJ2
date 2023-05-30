@@ -211,7 +211,6 @@ void Graph::prim() {
 void Graph::dfsPreOrder(Vertex *vertex, std::vector<Vertex *> &preOrder) {
     preOrder.push_back(vertex);
     vertex->setVisited(true);
-
     for (auto& v : getVertexSet()) {
         if (v->getPath() && v->getPath()->getOrigin()->getId() == vertex->getId() && !v->isVisited()) {
             dfsPreOrder(v, preOrder);
@@ -262,6 +261,8 @@ void Graph::approximation() {
             }
         }
     }
+
+    std::cout << std::endl;
 
     for (auto& v : order) {
         std::cout << v->getId() << " ";
