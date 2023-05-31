@@ -233,13 +233,21 @@ double Graph::convert_to_rads(double coord) {
     return coord * M_PI / 180;
 }
 
-void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned int count, std::vector<int> &path) {
+void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned int count, std::vector<int> &path, int* array) {
     if (distance >= minDist) return;
+
+    array[count] = vertex->getId();
 
     if (count == getVertexSet().size() - 1) {
         for (auto& e : vertex->getAdj()) {
             if (e->getDest()->getId() == 0) {
-                minDist = std::min(minDist, distance + e->getDistance());
+                if (distance + e->getDistance() < minDist) {
+                    minDist = distance + e->getDistance();
+                    path.clear();
+                    for (int i = 0; i < getVertexSet().size(); i++) {
+                        path.push_back(array[i]);
+                    }
+                }
                 return;
             }
         }
@@ -248,7 +256,7 @@ void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned
     for (auto& e : vertex->getAdj()) {
         if (!e->getDest()->isVisited()) {
             e->getDest()->setVisited(true);
-            tspBTRec(e->getDest(), minDist, distance + e->getDistance(), count + 1, path);
+            tspBTRec(e->getDest(), minDist, distance + e->getDistance(), count + 1, path, array);
             e->getDest()->setVisited(false);
         }
     }
@@ -257,14 +265,19 @@ void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned
 double Graph::tspBT(std::vector<int> &path) {
     for (auto& v : getVertexSet()) {
         v.second->setVisited(false);
+        v.second->setPath(nullptr);
     }
+
+    int *array = new int(getVertexSet().size());
 
     double minDist = INF;
     double distance = 0;
     unsigned int count = 0;
     auto root = getVertexSet().find(0)->second;
     root->setVisited(true);
-    tspBTRec(root, minDist, distance, count, path);
+    tspBTRec(root, minDist, distance, count, path, array);
+
+    delete array;
 
     return minDist;
 }

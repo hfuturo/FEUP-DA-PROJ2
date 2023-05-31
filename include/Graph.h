@@ -110,7 +110,7 @@ public:
       * @param count The number of the nodes visited in the current path
       * @param path The current path
       */
-     void tspBTRec(Vertex* vertex, double& minDist, double distance, unsigned int count, std::vector<int>& path);
+     void tspBTRec(Vertex* vertex, double& minDist, double distance, unsigned int count, std::vector<int>& path, int* array);
 
      /**
       * @brief Executes a backtracking algorithm to solve the TSP problem.
@@ -198,7 +198,6 @@ public:
       * @param validApproximation Flag telling is graph is complete or incomplete. If complete this variable is set to true and false otherwise.
       */
      void otherHeuristicsRec(Vertex* vertex, double& distance, std::vector<int>& path, unsigned int count, bool& validApproximation);
-
 };
 
 #endif //DA_PROJ2_GRAPH_H

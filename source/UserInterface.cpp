@@ -111,10 +111,12 @@ void UserInterface::showMenu() {
                     break;
                 }
 
-                std::cout << "*** Backtracking Algorithm ***\n";
+                std::cout << "*** Backtracking Algorithm ***\n\n";
 
                 std::vector<int> path;
                 double distance = graph.tspBT(path);
+
+                std::cout << "Path: ";
 
                 bool first = true;
                 for (auto& v : path) {
@@ -208,69 +210,141 @@ void UserInterface::showMenu() {
                 std::cout << std::endl;
                 std::cin.ignore();
 
+                double backTrackingDistance, approximationDistance, heuristicDistance;
                 std::vector<Vertex*> approximationPath;
                 std::vector<int> backtrackingPath;
+                std::vector<int> heuristicPath;
 
-                //TODO: Implement time for Other HEURISTICS
                 switch (userchoice2) {
                     case '1': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBT(backtrackingPath);
+                        backTrackingDistance = graph.tspBT(backtrackingPath);
                         auto tEndBStartA = std::chrono::high_resolution_clock::now();
-                        graph.approximation(approximationPath);
-                        auto tEndA = std::chrono::high_resolution_clock::now();
+                        approximationDistance = graph.approximation(approximationPath);
+                        auto tEndAStartOh = std::chrono::high_resolution_clock::now();
+                        heuristicDistance = graph.otherHeuristics(heuristicPath);
+                        auto tEndOh = std::chrono::high_resolution_clock::now();
 
                         std::chrono::duration<double, std::milli> time_b = tEndBStartA - tStartB;
-                        std::chrono::duration<double, std::milli> time_a = tEndA - tEndBStartA;
-                        std::cout << "Backtracking algorithm took " << time_b.count() << " milliseconds.\n";
-                        std::cout << "Approximation algorithm took " << time_a.count() << " milliseconds.\n";
-                        std::cout << "Approximation algorithm was " << time_b.count() - time_a.count() << " milliseconds faster, which is a "
-                            << (time_b.count() - time_a.count()) * 100 / time_b.count() << "% improvement\n";
+                        std::chrono::duration<double, std::milli> time_a = tEndAStartOh - tEndBStartA;
+                        std::chrono::duration<double, std::milli> time_oh = tEndOh - tEndAStartOh;
+                        std::cout << "Backtracking algorithm\n\t Distance: " << backTrackingDistance << " meters in " << time_b.count() << " milliseconds.\n";
+                        std::cout << "Approximation algorithm\n\t Distance: " << approximationDistance << " meters in " << time_a.count() << " milliseconds.\n";
+                        std::cout << "Other Heuristics algorithm\n\t Distance: " << heuristicDistance << " meters in " << time_oh.count() << " milliseconds.\n\n";
+
+
                         break;
                     }
 
                     case '2': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBT(backtrackingPath);
+                        backTrackingDistance = graph.tspBT(backtrackingPath);
                         auto tEndBStartA = std::chrono::high_resolution_clock::now();
-                        graph.approximation(approximationPath);
+                        approximationDistance = graph.approximation(approximationPath);
                         auto tEndA = std::chrono::high_resolution_clock::now();
 
                         std::chrono::duration<double, std::milli> time_b = tEndBStartA - tStartB;
                         std::chrono::duration<double, std::milli> time_a = tEndA - tEndBStartA;
-                        std::cout << "Backtracking algorithm took " << time_b.count() << " milliseconds.\n";
-                        std::cout << "Approximation algorithm took " << time_a.count() << " milliseconds.\n";
-                        std::cout << "Approximation algorithm was " << time_b.count() - time_a.count() << " milliseconds faster, which is a "
-                                  << (time_b.count() - time_a.count()) * 100 / time_b.count() << "% improvement\n";
+                        std::cout << "Backtracking algorithm\n\t Distance: " << backTrackingDistance << " meters in " << time_b.count() << " milliseconds.\n";
+                        std::cout << "Approximation algorithm\n\t Distance: " << approximationDistance << "meters in "<< time_a.count() << " milliseconds.\n\n";
+                        bool backTrackGreaterTime = time_b.count() >= time_a.count();
+                        bool backTrackGreaterDistance = backTrackingDistance >= approximationDistance;
+
+                        if (backTrackGreaterTime) {
+                            std::cout << "Approximation algorithm was " << time_b.count() - time_a.count() << " milliseconds faster, which is a "
+                                      << (time_b.count() - time_a.count()) * 100 / time_b.count() << "% improvement\n";
+                        }
+                        else {
+                            std::cout << "Backtracking algorithm was " << time_a.count() - time_b.count() << " milliseconds faster, which is a "
+                                      << (time_a.count() - time_b.count()) * 100 / time_a.count() << "% improvement\n";
+                        }
+
+                        if (backTrackGreaterDistance) {
+                            std::cout << "Other Heuristics algorithm distance is " << backTrackingDistance - approximationDistance << " meters shorter, which is a "
+                                      << (backTrackingDistance - approximationDistance) * 100 / backTrackingDistance << "% improvement\n";
+                        }
+                        else {
+                            std::cout << "Backtracking algorithm distance is " << approximationDistance - backTrackingDistance << " meters shorter, which is a "
+                                      << (approximationDistance - backTrackingDistance) * 100 / approximationDistance << "% improvement\n";
+                        }
+
                         break;
                     }
 
-                    //TODO: Implement time for other heuristics
                     case '3': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
-                        graph.tspBT(backtrackingPath);
+                        backTrackingDistance = graph.tspBT(backtrackingPath);
                         auto tEndBStartOH = std::chrono::high_resolution_clock::now();
-                        // TODO:: CHAMAR OTHER HEURISTICS FUNCTION
+                        heuristicDistance = graph.otherHeuristics(heuristicPath);
                         auto tEndOH = std::chrono::high_resolution_clock::now();
 
                         std::chrono::duration<double, std::milli> time_b = tEndBStartOH - tStartB;
                         std::chrono::duration<double, std::milli> time_oh = tEndOH - tEndBStartOH;
-                        std::cout << "Backtracking algorithm took " << time_b.count() << " milliseconds.\n";
-                        std::cout << "Other Heuristics algorithm took " << time_oh.count() << " milliseconds.\n";
+                        std::cout << "Backtracking algorithm\n\t Distance: " << backTrackingDistance << " meters in " << time_b.count() << " milliseconds.\n";
+                        std::cout << "Other Heuristics algorithm\n\t Distance: " << heuristicDistance << " meters in " << time_oh.count() << " milliseconds.\n\n";
+                        bool backTrackGreaterTime = time_b.count() >= time_oh.count();
+                        bool backTrackGreaterDistance = backTrackingDistance >= heuristicDistance;
+
+                        if (backTrackGreaterTime) {
+                            std::cout << "Other Heuristics algorithm was " << time_b.count() - time_oh.count() << " milliseconds faster, which is a "
+                                << (time_b.count() - time_oh.count()) * 100 / time_b.count() << "% improvement\n";
+                        }
+                        else {
+                            std::cout << "Backtracking algorithm was " << time_oh.count() - time_b.count() << " milliseconds faster, which is a "
+                                      << (time_oh.count() - time_b.count()) * 100 / time_oh.count() << "% improvement\n";
+                        }
+
+                        if (backTrackGreaterDistance) {
+                            std::cout << "Other Heuristics algorithm distance is " << backTrackingDistance - heuristicDistance << " meters shorter, which is a "
+                                << (backTrackingDistance - heuristicDistance) * 100 / backTrackingDistance << "% improvement\n";
+                        }
+                        else {
+                            std::cout << "Backtracking algorithm distance is " << heuristicDistance - backTrackingDistance << " meters shorter, which is a "
+                                      << (heuristicDistance - backTrackingDistance) * 100 / heuristicDistance << "% improvement\n";
+                        }
+
+                        break;
                     }
 
-                    //TODO: Implement time for other heuristics
                     case '4': {
                         auto tStartA = std::chrono::high_resolution_clock::now();
-                        graph.approximation(approximationPath);
+                        approximationDistance = graph.approximation(approximationPath);
                         auto tEndAStartOH = std::chrono::high_resolution_clock::now();
-                        //TODO: CHAMAR OTHER HEURISTICS FUNCTION
+                        heuristicDistance = graph.otherHeuristics(heuristicPath);
                         auto tEndOH = std::chrono::high_resolution_clock::now();
+
+                        if (heuristicDistance == -1) {
+                            std::cout << "Unable to do approximation. Graph is not complete";
+                            break;
+                        }
 
                         std::chrono::duration<double, std::milli> time_a = tEndAStartOH - tStartA;
                         std::chrono::duration<double, std::milli> time_oh = tEndOH - tEndAStartOH;
-                        std::cout << "Approximation algorithm took " << time_a.count() << " milliseconds.\n";
-                        std::cout << "Other Heuristics algorithm took " << time_oh.count() << " milliseconds.\n";
+                        std::cout << "Approximation algorithm\n\t Distance: " << approximationDistance << " meters in " << time_a.count() << " milliseconds.\n";
+                        std::cout << "Other Heuristics algorithm\n\t Distance: " << heuristicDistance << " meters in " << time_oh.count() << " milliseconds.\n\n";
+
+                        bool approximationGreaterTime = time_a.count() >= time_oh.count();
+                        bool approximationGreaterDistance = approximationDistance >= heuristicDistance;
+
+                        if (approximationGreaterTime) {
+                            std::cout << "Other Heuristics algorithm was " << time_a.count() - time_oh.count() << " milliseconds faster, which is a "
+                                      << (time_a.count() - time_oh.count()) * 100 / time_a.count() << "% improvement\n";
+                        }
+                        else {
+                            std::cout << "Approximation algorithm was " << time_oh.count() - time_a.count() << " milliseconds faster, which is a "
+                                      << (time_oh.count() - time_a.count()) * 100 / time_oh.count() << "% improvement\n";
+                        }
+
+                        if (approximationGreaterDistance) {
+                            std::cout << "Other Heuristics algorithm distance is " << approximationDistance - heuristicDistance << " meters shorter, which is a "
+                                      << (approximationDistance - heuristicDistance) * 100 / approximationDistance << "% improvement\n";
+                        }
+                        else {
+                            std::cout << "Approximation algorithm distance is " << heuristicDistance - approximationDistance << " meters shorter, which is a "
+                                      << (heuristicDistance - approximationDistance) * 100 / heuristicDistance << "% improvement\n";
+                        }
+
+                        break;
                     }
                 }
                 break;
