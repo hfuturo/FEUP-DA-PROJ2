@@ -11,32 +11,16 @@ int Vertex::getId() const {
     return this->id;
 }
 
-void Vertex::setId(const int id) {
-    this->id = id;
-}
-
 double Vertex::getLongitude() const {
     return this->longitude;
-}
-
-void Vertex::setLongitude(double longitude) {
-    this->longitude = longitude;
 }
 
 double Vertex::getLatitude() const {
     return this->latitude;
 }
 
-void Vertex::setLatitude(double latitude) {
-    this->latitude = latitude;
-}
-
 std::vector<Edge *> Vertex::getAdj() const {
     return this->adj;
-}
-
-std::vector<Edge *> Vertex::getIncoming() const {
-    return this->incoming;
 }
 
 double Vertex::getDistance() const {
@@ -84,30 +68,14 @@ Vertex *Edge::getOrigin() const {
     return this->origin;
 }
 
-void Edge::setOrigin(Vertex *origin) {
-    this->origin = origin;
-}
-
 Vertex *Edge::getDest() const {
     return this->dest;
-}
-
-void Edge::setDest(Vertex *dest) {
-    this->dest = dest;
 }
 
 double Edge::getDistance() const {
     return this->distance;
 }
 
-void Edge::setDistance(double distance) {
-    this->distance = distance;
-}
-
 void Edge::setReverse(Edge *reverse) {
     this->reverse = reverse;
-}
-
-Edge *Edge::getReverse() const {
-    return this->reverse;
 }

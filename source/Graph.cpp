@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <chrono>
+#include <map>
 
 #include "../include/Graph.h"
 #include "../include/MutablePriorityQueue.h"
@@ -148,11 +149,6 @@ void Graph::prim() {
             }
         }
     }
-
-    for (auto& v  :getVertexSet()) {
-        if (v.second->getPath()) std::cout << v.second->getPath()->getOrigin()->getId() << "->" << v.second->getId() << std::endl;
-    }
-    std::cout << std::endl;
 }
 
 void Graph::dfsPreOrder(Vertex *vertex, std::vector<Vertex *> &preOrder) {
@@ -271,4 +267,55 @@ double Graph::tspBT(std::vector<int> &path) {
     tspBTRec(root, minDist, distance, count, path);
 
     return minDist;
+}
+
+void Graph::otherHeuristicsRec(Vertex *vertex, double& distance, std::vector<int>& path, unsigned int count, bool& validApproximation) {
+    if (!validApproximation) return;
+
+    auto edges = vertex->getAdj();
+    double minDist = INF;
+    Edge* e = nullptr;
+
+    for (auto& edge : edges) {
+        if (count == getVertexSet().size() - 1) {
+            if (edge->getDest()->getId() == 0) {
+                distance += edge->getDistance();
+                return;
+            }
+        }
+        else {
+            if (edge->getDistance() < minDist && !edge->getDest()->isVisited()) {
+                minDist = edge->getDistance();
+                e = edge;
+            }
+        }
+    }
+
+    if (!e) {
+        validApproximation = false;
+        otherHeuristicsRec(nullptr, distance, path, count + 1, validApproximation);
+    }
+    else {
+        e->getDest()->setVisited(true);
+        path.push_back(e->getDest()->getId());
+        distance += minDist;
+        otherHeuristicsRec(e->getDest(), distance, path, count + 1, validApproximation);
+    }
+}
+
+double Graph::otherHeuristics(std::vector<int>& path) {
+    double distance = 0;
+    unsigned int count = 0;
+    bool validApproximation = true;
+
+    for (auto& v : getVertexSet()) {
+        v.second->setVisited(false);
+    }
+
+    auto root = getVertexSet().find(0);
+    root->second->setVisited(true);
+    path.push_back(root->first);
+    otherHeuristicsRec(root->second, distance, path, count, validApproximation);
+
+    return validApproximation ? distance : -1;
 }

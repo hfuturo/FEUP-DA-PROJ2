@@ -90,11 +90,7 @@ void UserInterface::showMenu() {
                             std::cout << "\nInvalid input.\n\n";
                         }
                         std::cout << "\nReading file...\n";
-                        auto tStart = std::chrono::high_resolution_clock::now();
                         graph.fill(REAL_WORLD_GRAPHS + file, true);
-                        auto tEnd = std::chrono::high_resolution_clock::now();
-                        std::chrono::duration<double, std::milli> time_a = tEnd - tStart;
-                        std::cout << "Graph " << file << ": " << time_a.count() << std::endl;
                         break;
                     }
 
@@ -105,7 +101,7 @@ void UserInterface::showMenu() {
                     }
                 }
 
-                if (validInput) std::cout << "Done.\n";
+                if (validInput) std::cout << "Done.";
                 break;
             }
 
@@ -115,7 +111,7 @@ void UserInterface::showMenu() {
                     break;
                 }
 
-                std::cout << "*** Backtracking Algorithm ***\n\n";
+                std::cout << "*** Backtracking Algorithm ***\n";
 
                 std::vector<int> path;
                 double distance = graph.tspBT(path);
@@ -132,7 +128,7 @@ void UserInterface::showMenu() {
                 }
 
                 std::cout << std::endl;
-                std::cout << "Distance: " << distance << std::endl << std::endl;
+                std::cout << "Distance: " << distance;
 
                 break;
             }
@@ -146,7 +142,7 @@ void UserInterface::showMenu() {
                 std::cout << "*** Approximation Algorithm ***\n\n";
                 std::vector<Vertex*> path;
                 double distance = graph.approximation(path);
-                std::cout << "Path:\n\t";
+                std::cout << "Path: ";
 
                 bool first = true;
                 for (auto& v : path) {
@@ -159,17 +155,38 @@ void UserInterface::showMenu() {
                     }
                 }
                 std::cout << std::endl;
-                std::cout << "Distance: " << distance << std::endl << std::endl;
+                std::cout << "Distance: " << distance;
                 break;
             }
 
-            //TODO: IMPLEMENT
             case '3': {
                 if (graph.getVertexSet().empty()) {
                     std::cout << "You need to read a graph in '(0) Read and Parse Dataset'\n";
                     break;
                 }
 
+                std::vector<int> path;
+                double distance = graph.otherHeuristics(path);
+
+                if (distance == -1) {
+                    std::cout << "Unable to do approximation. Graph is not complete";
+                    break;
+                }
+
+                std::cout << "Path: ";
+
+                bool first = true;
+                for (auto& v : path) {
+                    if (first) {
+                        first = false;
+                        std::cout << v;
+                    }
+                    else {
+                        std::cout << " -> " << v;
+                    }
+                }
+                std::cout << std::endl;
+                std::cout << "Distance: " << distance;
                 break;
             }
 

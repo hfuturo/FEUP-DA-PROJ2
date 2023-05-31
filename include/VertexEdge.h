@@ -92,15 +92,6 @@ public:
     int getId() const;
 
     /**
-     * @brief Sets the id of a vertex.
-     *
-     * @note Complexity time: O(1)
-     *
-     * @param id The new vertex id.
-     */
-    void setId(const int id);
-
-    /**
      * @brief Return the longitude of the vertex
      *
      * @note Complexity time: O(1)
@@ -110,15 +101,6 @@ public:
     double getLongitude() const;
 
     /**
-     * @brief Sets the longitude of this vertex
-     *
-     * @note Complexity time: O(1)
-     *
-     * @param longitude The longitude
-     */
-    void setLongitude(double longitude);
-
-    /**
      * @brief Returns the latitude of the vertex
      *
      * @note Complexity time: O(1)
@@ -126,15 +108,6 @@ public:
      * @return The latitude
      */
     double getLatitude() const;
-
-    /**
-     * @brief Sets the latitude of this vertex
-     *
-     * @note Complexity time: O(1)
-     *
-     * @param latitude The latitude
-     */
-    void setLatitude(double latitude);
 
     /**
      * @brief Sees if a vertex has benn visited.
@@ -213,15 +186,6 @@ public:
     std::vector<Edge*> getAdj() const;
 
     /**
-     * @brief Gets the incoming edges of this vertex.
-     *
-     * @note Complexity time: O(1)
-     *
-     * @return Vector with the incoming edges.
-     */
-    std::vector<Edge*> getIncoming() const;
-
-    /**
      * @brief Compares this vertex's cost to another vertex's cost.
      *
      * @note Complexity time: O(1).
@@ -288,15 +252,6 @@ public:
     Vertex* getOrigin() const;
 
     /**
-     * @brief Sets the origin of the edge.
-     *
-     * @note Complexity time: O(1)
-     *
-     * @param origin The origin of the edge.
-     */
-    void setOrigin(Vertex* origin);
-
-    /**
      * @brief Returns the destination of the edge.
      *
      * @note Complexity time: O(1)
@@ -304,16 +259,6 @@ public:
      * @return The destination of the edge.
      */
     Vertex* getDest() const;
-
-    /**
-     * @brief Sets the destination of the edge.
-     *
-     * @note Complexity time: O(1)
-     *
-     * @param dest The destination of the edge.
-     */
-     void setDest(Vertex* dest);
-
 
      /**
       * @brief Returns the distance of the edge.
@@ -325,24 +270,6 @@ public:
      double getDistance() const;
 
      /**
-      * @brief Sets the distance of the edge.
-      *
-      * @note Complexity time: O(1)
-      *
-      * @param distance The distance of the edge.
-      */
-     void setDistance(double distance);
-
-     /**
-      * @brief Returns the reverse edge that connects the destination station to this station.
-      *
-      * @note Complexity time: O(1)
-      *
-      * @return The resverse edge.
-      */
-     Edge* getReverse() const;
-
-     /**
       * @brief Sets the reverse edge that connects the destination station to this station.
       *
       * @note Complexity time: O(1)
@@ -350,7 +277,6 @@ public:
       * @param reverse The reverse edge.
       */
      void setReverse(Edge* reverse);
-
 };
 
 

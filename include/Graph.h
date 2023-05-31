@@ -180,6 +180,25 @@ public:
       */
      double convert_to_rads(double coord);
 
+     /**
+      * @brief Calculates a possible TSP solution visiting the closest neighbor.
+      *
+      * @param path The path of the possible TSP solution.
+      * @return The distance upon success or -1 otherwise.
+      */
+     double otherHeuristics(std::vector<int>& path);
+
+     /**
+      * @brief Executes the "heavy work" of the heuristic. Visits every node using the shortest edge using recursion.
+      *
+      * @param vertex The root
+      * @param distance The current distance
+      * @param path The current path
+      * @param count The number of nodes already visited
+      * @param validApproximation Flag telling is graph is complete or incomplete. If complete this variable is set to true and false otherwise.
+      */
+     void otherHeuristicsRec(Vertex* vertex, double& distance, std::vector<int>& path, unsigned int count, bool& validApproximation);
+
 };
 
 #endif //DA_PROJ2_GRAPH_H
