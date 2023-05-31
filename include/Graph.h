@@ -15,11 +15,11 @@ public:
     Graph();
 
     /**
-     * @brief Get the vector where all the stations are stored.
+     * @brief Get the unoredered_map where all the stations are stored.
      *
      * @note Complexity time: O(1).
      *
-     * @return A vector containing all the stations of the graph.
+     * @return An unordered_map containing all the stations of the graph.
      */
     const std::unordered_map<int, Vertex*>& getVertexSet() const;
 
@@ -51,7 +51,7 @@ public:
       * @param dest The vertex of destination.
       * @param distance The distance of the edge
       *
-      * @return True if the edge was successfullu added.
+      * @return True if the edge was successfully added.
       * @return False otherwise.
       */
      bool addBidirectionalEdge(const int origin, const int  dest, const double distance);

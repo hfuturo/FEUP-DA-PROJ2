@@ -127,10 +127,6 @@ void Graph::prim() {
         v.second->setPath(nullptr);
     }
 
-    // possivel melhoria -> em vez de fazer sort (nlogn) percorrer vetor (n)
-    //std::sort(vertexSet.begin(), vertexSet.end(), [](Vertex* v1, Vertex*v2) {return v1->getId() < v2->getId();});
-
-    //Vertex* root = getVertexSet().front();
     auto root = getVertexSet().find(0);
     root->second->setDistance(0);
 
@@ -188,20 +184,22 @@ double Graph::approximation(std::vector<Vertex*>& path) {
 
     for (int i = 0; i < path.size(); i++) {
         auto v = path.at(i);
-        double prevDistance = distance;
+        bool edgesConnected = false;
         for (auto& e : v->getAdj()) {
             if (i == path.size() - 1) {
                 if (e->getDest()->getId() == 0) {
                     distance += e->getDistance();
+                    edgesConnected = true;
                 }
             }
             else {
                 if (e->getDest()->getId() == path.at(i + 1)->getId()) {
                     distance += e->getDistance();
+                    edgesConnected = true;
                 }
             }
         }
-        if (prevDistance == distance) {
+        if (!edgesConnected) {
             distance += i == path.size() - 1 ? haversine(v, getVertexSet().find(0)->second) : haversine(v, path.at(i+1));
             std::cout << "USED HAVERSINE\n\t" << v->getId();
             if (i == path.size() - 1) {
