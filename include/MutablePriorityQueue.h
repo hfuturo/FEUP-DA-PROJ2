@@ -13,6 +13,8 @@
 
 /**
  * class T must have: (i) accessible field int queueIndex; (ii) operator< defined.
+ *
+ * @note Implemented by João Pascoal Faria
  */
 
 template <class T>

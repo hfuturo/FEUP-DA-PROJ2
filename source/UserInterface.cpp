@@ -6,7 +6,6 @@
 #include "../include/Graph.h"
 #include "../include/constants.h"
 
-//TODO: Preencher Read and Parse Dataset caso sejam real graphs
 void UserInterface::showMenu() {
     Graph graph {};
     bool run = true;
@@ -191,6 +190,7 @@ void UserInterface::showMenu() {
                 std::vector<Vertex*> approximationPath;
                 std::vector<int> backtrackingPath;
 
+                //TODO: Implement time for Other HEURISTICS
                 switch (userchoice2) {
                     case '1': {
                         auto tStartB = std::chrono::high_resolution_clock::now();
