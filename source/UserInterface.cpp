@@ -90,7 +90,11 @@ void UserInterface::showMenu() {
                             std::cout << "\nInvalid input.\n\n";
                         }
                         std::cout << "\nReading file...\n";
+                        auto tStart = std::chrono::high_resolution_clock::now();
                         graph.fill(REAL_WORLD_GRAPHS + file, true);
+                        auto tEnd = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> time_a = tEnd - tStart;
+                        std::cout << "Graph " << file << ": " << time_a.count() << std::endl;
                         break;
                     }
 

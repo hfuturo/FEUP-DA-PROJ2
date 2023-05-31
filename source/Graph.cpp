@@ -13,7 +13,7 @@
 
 Graph::Graph() {}
 
-std::vector<Vertex *> Graph::getVertexSet() const {
+const std::vector<Vertex *>& Graph::getVertexSet() const {
     return this->vertexSet;
 }
 

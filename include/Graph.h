@@ -22,7 +22,7 @@ public:
      *
      * @return A vector containing all the stations of the graph.
      */
-     std::vector<Vertex*> getVertexSet() const;
+     const std::vector<Vertex*>& getVertexSet() const;
 
      /**
       * @brief Adds a vertex to the graph.
