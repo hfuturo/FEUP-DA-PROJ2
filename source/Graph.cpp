@@ -13,34 +13,27 @@
 
 Graph::Graph() {}
 
-const std::vector<Vertex *>& Graph::getVertexSet() const {
+const std::unordered_map<int, Vertex *> &Graph::getVertexSet() const {
     return this->vertexSet;
 }
 
 bool Graph::addVertex(const int id) {
-    vertexSet.push_back(new Vertex(id));
+    vertexSet[id] = new Vertex(id);
     return true;
 }
 
 bool Graph::addVertexRealGraph(const int id, const double longitude, const double latitude) {
-    vertexSet.push_back(new Vertex(id, longitude, latitude));
+    vertexSet[id] = new Vertex(id, longitude, latitude);
     return true;
-}
-
-Vertex *Graph::findVertex(const int id) const {
-    for (auto &v: getVertexSet())
-        if (v->getId() == id) return v;
-
-    return nullptr;
 }
 
 bool Graph::addBidirectionalEdge(const int origin, const int dest, const double distance) {
     if (distance < 0 || origin < 0 || dest < 0) return false;
-    auto v1 = findVertex(origin);
-    auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr) return false;
-    auto e1 =  v1->addEdge(v2, distance);
-    auto e2 = v2->addEdge(v1, distance);
+    auto v1 = vertexSet.find(origin);
+    auto v2 = vertexSet.find(dest);
+    if (v1 == vertexSet.end() || v2 == vertexSet.end()) return false;
+    auto e1 =  v1->second->addEdge(v2->second, distance);
+    auto e2 = v2->second->addEdge(v1->second, distance);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
@@ -65,8 +58,7 @@ void Graph::readVertices(const std::string& path, bool isRealGraph) {
             getline(ss, id, ',');
             getline(ss, longitude, ',');
             getline(ss, latitude);
-            if (findVertex(std::stoi(id)) == nullptr)
-                addVertexRealGraph(std::stoi(id), std::stod(longitude), std::stod(latitude));
+            addVertexRealGraph(std::stoi(id), std::stod(longitude), std::stod(latitude));
         }
     }
     else {
@@ -79,8 +71,8 @@ void Graph::readVertices(const std::string& path, bool isRealGraph) {
                 getline(ss, trash, ',');
                 getline(ss, trash);
             }
-            if (findVertex(std::stoi(id)) == nullptr) addVertex(std::stoi(id));
-            if (findVertex(std::stoi(dest)) == nullptr) addVertex(std::stoi(dest));
+            addVertex(std::stoi(id));
+            addVertex(std::stoi(dest));
         }
     }
 
@@ -130,21 +122,22 @@ void Graph::fill(const std::string& path, bool isRealGraph) {
 
 void Graph::prim() {
     for (auto& v : getVertexSet()) {
-        v->setVisited(false);
-        v->setDistance(INF);
-        v->setPath(nullptr);
+        v.second->setVisited(false);
+        v.second->setDistance(INF);
+        v.second->setPath(nullptr);
     }
 
     // possivel melhoria -> em vez de fazer sort (nlogn) percorrer vetor (n)
-    std::sort(vertexSet.begin(), vertexSet.end(), [](Vertex* v1, Vertex*v2) {return v1->getId() < v2->getId();});
+    //std::sort(vertexSet.begin(), vertexSet.end(), [](Vertex* v1, Vertex*v2) {return v1->getId() < v2->getId();});
 
-    Vertex* root = getVertexSet().front();
-    root->setDistance(0);
+    //Vertex* root = getVertexSet().front();
+    auto root = getVertexSet().find(0);
+    root->second->setDistance(0);
 
     MutablePriorityQueue<Vertex> q;
 
     for (auto& v : getVertexSet()) {
-        q.insert(v);
+        q.insert(v.second);
     }
 
     while (!q.empty()) {
@@ -161,7 +154,7 @@ void Graph::prim() {
     }
 
     for (auto& v  :getVertexSet()) {
-        if (v->getPath()) std::cout << v->getPath()->getOrigin()->getId() << "->" << v->getId() << std::endl;
+        if (v.second->getPath()) std::cout << v.second->getPath()->getOrigin()->getId() << "->" << v.second->getId() << std::endl;
     }
     std::cout << std::endl;
 }
@@ -170,20 +163,20 @@ void Graph::dfsPreOrder(Vertex *vertex, std::vector<Vertex *> &preOrder) {
     preOrder.push_back(vertex);
     vertex->setVisited(true);
     for (auto& v : getVertexSet()) {
-        if (v->getPath() && v->getPath()->getOrigin()->getId() == vertex->getId() && !v->isVisited()) {
-            dfsPreOrder(v, preOrder);
+        if (v.second->getPath() && v.second->getPath()->getOrigin()->getId() == vertex->getId() && !v.second->isVisited()) {
+            dfsPreOrder(v.second, preOrder);
         }
     }
 }
 
 std::vector<Vertex*> Graph::preOrder() {
     for (auto& v : getVertexSet()) {
-        v->setVisited(false);
+        v.second->setVisited(false);
     }
 
     std::vector<Vertex*> order;
 
-    dfsPreOrder(getVertexSet().front(), order);
+    dfsPreOrder(getVertexSet().find(0)->second, order);
 
     return order;
 }
@@ -209,10 +202,10 @@ double Graph::approximation(std::vector<Vertex*>& path) {
             }
         }
         if (prevDistance == distance) {
-            distance += i == path.size() - 1 ? haversine(v, findVertex(0)) : haversine(v, path.at(i+1));
+            distance += i == path.size() - 1 ? haversine(v, getVertexSet().find(0)->second) : haversine(v, path.at(i+1));
             std::cout << "USED HAVERSINE\n\t" << v->getId();
             if (i == path.size() - 1) {
-                std::cout << " to 0 with distance: " << haversine(v, findVertex(0)) << "\n";
+                std::cout << " to 0 with distance: " << haversine(v, getVertexSet().find(0)->second) << "\n";
             }
             else {
                 std::cout << " to " << path.at(i+1)->getId() << " with distance: " << haversine(v, path.at(i+1))<< std::endl;
@@ -269,13 +262,13 @@ void Graph::tspBTRec(Vertex * vertex, double &minDist, double distance, unsigned
 
 double Graph::tspBT(std::vector<int> &path) {
     for (auto& v : getVertexSet()) {
-        v->setVisited(false);
+        v.second->setVisited(false);
     }
 
     double minDist = INF;
     double distance = 0;
     unsigned int count = 0;
-    auto root = getVertexSet().front();
+    auto root = getVertexSet().find(0)->second;
     root->setVisited(true);
     tspBTRec(root, minDist, distance, count, path);
 

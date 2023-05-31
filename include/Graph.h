@@ -7,8 +7,7 @@
 #include "../include/VertexEdge.h"
 
 class Graph {
-    std::vector<Vertex*> vertexSet;
-
+    std::unordered_map<int, Vertex*> vertexSet;
 public:
     /**
      * @brief Creates an empty graph.
@@ -22,7 +21,7 @@ public:
      *
      * @return A vector containing all the stations of the graph.
      */
-     const std::vector<Vertex*>& getVertexSet() const;
+    const std::unordered_map<int, Vertex*>& getVertexSet() const;
 
      /**
       * @brief Adds a vertex to the graph.
