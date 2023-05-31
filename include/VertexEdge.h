@@ -14,6 +14,9 @@ class Edge;
  */
 #define INF std::numeric_limits<double>::max()
 
+/**
+ * @brief Represents a vertex in the graph.
+ */
 class Vertex {
 private:
     /**
@@ -60,7 +63,8 @@ public:
     /**
      * @brief Constructor that initializes a vertex with id.
      *
-     * @note Used for Toy-graphs
+     * @note Used for Toy-graphs and Medium Graphs
+     * @note Complexity time: O(1)
      *
      * @param id The vertex id.
      */
@@ -70,6 +74,7 @@ public:
      * @brief Constructor that initializes a vertex with id, longitude and latitude.
      *
      * @note Used for Real-world Graphs
+     * @note Complexity time: O(1)
      *
      * @param id The id
      * @param longitude The longitude
@@ -80,12 +85,16 @@ public:
     /**
      * @brief Returns the id of a vertex.
      *
+     * @note Complexity time: O(1)
+     *
      * @return The vertex id.
      */
     int getId() const;
 
     /**
      * @brief Sets the id of a vertex.
+     *
+     * @note Complexity time: O(1)
      *
      * @param id The new vertex id.
      */
@@ -94,12 +103,16 @@ public:
     /**
      * @brief Return the longitude of the vertex
      *
+     * @note Complexity time: O(1)
+     *
      * @return The longitude
      */
     double getLongitude() const;
 
     /**
      * @brief Sets the longitude of this vertex
+     *
+     * @note Complexity time: O(1)
      *
      * @param longitude The longitude
      */
@@ -108,12 +121,16 @@ public:
     /**
      * @brief Returns the latitude of the vertex
      *
+     * @note Complexity time: O(1)
+     *
      * @return The latitude
      */
     double getLatitude() const;
 
     /**
      * @brief Sets the latitude of this vertex
+     *
+     * @note Complexity time: O(1)
      *
      * @param latitude The latitude
      */
@@ -122,12 +139,16 @@ public:
     /**
      * @brief Sees if a vertex has benn visited.
      *
+     * @note Complexity time: O(1)
+     *
      * @return True if visited, False otherwise.
      */
     bool isVisited() const;
 
     /**
      * @brief Sets a vertex as visited or not.
+     *
+     * @note Complexity time: O(1)
      *
      * @param visited The visited attribute.
      */
@@ -136,12 +157,16 @@ public:
     /**
      * @brief Gets the distance it takes to get to this vertex.
      *
+     * @note Complexity time: O(1)
+     *
      * @return The distance.
      */
     double getDistance() const;
 
     /**
      * @brief Sets the distance it takes to get to this vertex.
+     *
+     * @note Complexity time: O(1)
      *
      * @param distance The distance.
      */
@@ -150,6 +175,8 @@ public:
     /**
      * @brief Gets the edge that connects this vertex to the previous one.
      *
+     * @note Complexity time: O(1)
+     *
      * @return The Edge if the Vertex is connected. nullptr otherwise.
      */
     Edge* getPath() const;
@@ -157,12 +184,16 @@ public:
     /**
      * @brief Sets the edge that connects this vertex to the previous one.
      *
+     * @note Complexity time: O(1)
+     *
      * @param path The edge that connects this vertex to the previous one.
      */
     void setPath(Edge* path);
 
     /**
      * @brief Connects two vertices by adding an edge.
+     *
+     * @note Complexity time: O(1)
      *
      * @param dest The destination vertex.
      * @param distance  The distance of the edge.
@@ -195,7 +226,7 @@ public:
      *
      * @note Complexity time: O(1).
      *
-     * @param vertex The another vertex that we are goingo to comapre with.
+     * @param vertex The another vertex that we are going  to compare with.
      * @return True if this vertex's cost is fewer than the other vertex's cost. False otherwise.
      */
     bool operator<(Vertex& vertex) const;
@@ -239,6 +270,7 @@ public:
      * @brief Constructor that initializes an edge.
      *
      * @note Used for all graphs.
+     * @note Complexity time: O(1)
      *
      * @param origin The origin of the edge.
      * @param dest The destinations of the edge.
@@ -249,12 +281,16 @@ public:
     /**
      * @brief Returns the origin of the edge.
      *
+     * @note Complexity time: O(1)
+     *
      * @return The origin of the edge.
      */
     Vertex* getOrigin() const;
 
     /**
      * @brief Sets the origin of the edge.
+     *
+     * @note Complexity time: O(1)
      *
      * @param origin The origin of the edge.
      */
@@ -263,12 +299,16 @@ public:
     /**
      * @brief Returns the destination of the edge.
      *
+     * @note Complexity time: O(1)
+     *
      * @return The destination of the edge.
      */
     Vertex* getDest() const;
 
     /**
      * @brief Sets the destination of the edge.
+     *
+     * @note Complexity time: O(1)
      *
      * @param dest The destination of the edge.
      */
@@ -278,12 +318,16 @@ public:
      /**
       * @brief Returns the distance of the edge.
       *
+      * @note Complexity time: O(1)
+      *
       * @return The distance of the edge.
       */
      double getDistance() const;
 
      /**
       * @brief Sets the distance of the edge.
+      *
+      * @note Complexity time: O(1)
       *
       * @param distance The distance of the edge.
       */
@@ -292,12 +336,16 @@ public:
      /**
       * @brief Returns the reverse edge that connects the destination station to this station.
       *
+      * @note Complexity time: O(1)
+      *
       * @return The resverse edge.
       */
      Edge* getReverse() const;
 
      /**
       * @brief Sets the reverse edge that connects the destination station to this station.
+      *
+      * @note Complexity time: O(1)
       *
       * @param reverse The reverse edge.
       */

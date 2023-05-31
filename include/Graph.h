@@ -6,16 +6,24 @@
 
 #include "../include/VertexEdge.h"
 
+/**
+ * @brief Represents a graph where the nodes are locations related to shipping deliveries, tourism, ... And the edges represent the connection between these nodes.
+ */
 class Graph {
+    /**
+     * @brief Stores all nodes of the graph.
+     */
     std::unordered_map<int, Vertex*> vertexSet;
 public:
     /**
      * @brief Creates an empty graph.
+     *
+     * @note: Complexity time: O(1)
      */
     Graph();
 
     /**
-     * @brief Get the unoredered_map where all the stations are stored.
+     * @brief Get the unordered_map where all the stations are stored.
      *
      * @note Complexity time: O(1).
      *
@@ -28,6 +36,8 @@ public:
       *
       * @param id The vertex id
       *
+      * @note Complexity time: O(V)
+      *
       * @return True if the vertex was successfully added.
       * @return False otherwise.
       */
@@ -35,6 +45,8 @@ public:
 
      /**
       * @brief Adds a vertex in info from a real graph
+      *
+      * @note Complexity time: O(V)
       *
       * @param id The vertex id
       * @param longitude The longitude of the vertex
@@ -47,6 +59,8 @@ public:
      /**
       * @brief Adds an edge to the graph.
       *
+      * @note Complexity time: O(V)
+      *
       * @param origin The vertex of origin.
       * @param dest The vertex of destination.
       * @param distance The distance of the edge
@@ -56,19 +70,13 @@ public:
       */
      bool addBidirectionalEdge(const int origin, const int  dest, const double distance);
 
-     /**
-      * @brief Searches all the vertices and returns one if the given id exists.
-      *
-      * @param id The id of the vertex we are looking for
-      *
-      * @return The vertex if exists. Nullptr otherwise.
-      */
-     Vertex* findVertex(const int id) const;
-
     /**
      * @brief Populates the graph with the information from the csv files in the dataset.
      *
-     * @note Complexity time: O(V^2).
+     * @note O(V+E)
+     *
+     * @param path The file path
+     * @param isRealGraph Boolean telling if file is from Real Graph.
      */
      void fill(const std::string& path, bool isRealGraph);
 
@@ -76,11 +84,16 @@ public:
       * @brief Reads the vertices from the file and adds them to the graph.
       *
       * @note Complexity time: O(V)
+      *
+      * @param path The file path
+      * @param isRealGraph Boolean telling if file is from Real Graph.
       */
      void readVertices(const std::string& path, bool isRealGraph);
 
      /**
       * @brief Reads the edges from the file and adds them into the graph.
+      *
+      * @param path The file path
       *
       * @note Complexity time: O(E)
       */
@@ -88,6 +101,8 @@ public:
 
      /**
       * @brief Does the recursive work of tspBT
+      *
+      * @note Complexity time: O(V!)
       *
       * @param vertex The root of the TSP problem
       * @param minDist The minimal distance of the TSP problem
@@ -100,6 +115,8 @@ public:
      /**
       * @brief Executes a backtracking algorithm to solve the TSP problem.
       *
+      * @note Complexity time: O(V!)
+      *
       * @param path The path of nodes corresponding to the minimal distance.
       *
       * @return The minimal distance.
@@ -108,16 +125,25 @@ public:
 
      /**
       * @brief Executes prim's algorithm to compute MST
+      *
+      * @note Complexity time: O(E Log V)
       */
      void prim();
 
      /**
       * @brief Executes Depth First Search (DFS) algorithm to compute pre-order of graph
+      *
+      * @param vertex The root of DFS
+      * @param preOrder The order of DFS
+      *
+      * @note Complexity time: O(V+E)
       */
      void dfsPreOrder(Vertex* vertex, std::vector<Vertex*>& preOrder);
 
      /**
       * @brief Finds the preOrder of a graph
+      *
+      * @note Complexity time: O(V+E)
       *
       * @return Vector with vertices in pre-order
       */
@@ -126,12 +152,17 @@ public:
      /**
       * @brief Executes an approximation algorithm for TSP
       *
+      * @note Complexity time: O(V+E)
+      *
+      * @param path The path corresponding to the best value
       * @return The approximation value.
       */
      double approximation(std::vector<Vertex*>& path);
 
      /**
       * @brief Calculates the distance between two vertices using their latitude and longitude
+      *
+      * @note Complexity time: O(1)
       *
       * @param v1 The first vertex
       * @param v2 The second vertex
@@ -141,6 +172,8 @@ public:
 
      /**
       * @brief Converts a coordinate to radians
+      *
+      * @note Complexity time: O(1)
       *
       * @param coord The coordinate
       * @return The coordinate in radians
