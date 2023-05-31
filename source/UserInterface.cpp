@@ -114,7 +114,11 @@ void UserInterface::showMenu() {
                 std::cout << "*** Backtracking Algorithm ***\n\n";
 
                 std::vector<int> path;
+
+                auto start = std::chrono::high_resolution_clock::now();
                 double distance = graph.tspBT(path);
+                auto stop = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> time = stop - start;
 
                 std::cout << "Path: ";
 
@@ -130,7 +134,8 @@ void UserInterface::showMenu() {
                 }
 
                 std::cout << std::endl;
-                std::cout << "Distance: " << distance;
+                std::cout << "Distance: " << distance << std::endl;
+                std::cout << "Time: " << time.count() << " milliseconds";
 
                 break;
             }
@@ -225,6 +230,11 @@ void UserInterface::showMenu() {
                         heuristicDistance = graph.otherHeuristics(heuristicPath);
                         auto tEndOh = std::chrono::high_resolution_clock::now();
 
+                        if (heuristicDistance == -1) {
+                            std::cout << "Unable to do approximation. Graph is not complete";
+                            break;
+                        }
+
                         std::chrono::duration<double, std::milli> time_b = tEndBStartA - tStartB;
                         std::chrono::duration<double, std::milli> time_a = tEndAStartOh - tEndBStartA;
                         std::chrono::duration<double, std::milli> time_oh = tEndOh - tEndAStartOh;
@@ -232,6 +242,48 @@ void UserInterface::showMenu() {
                         std::cout << "Approximation algorithm\n\t Distance: " << approximationDistance << " meters in " << time_a.count() << " milliseconds.\n";
                         std::cout << "Other Heuristics algorithm\n\t Distance: " << heuristicDistance << " meters in " << time_oh.count() << " milliseconds.\n\n";
 
+                        std::pair<double, std::string> ap {time_a.count(), "Approximation"};
+                        std::pair<double, std::string> bt {time_b.count(), "Backtracking"};
+                        std::pair<double, std::string> oh {time_oh.count(), "Other Heuristics"};
+
+                        std::vector<std::pair<double, std::string>> times;
+                        times.push_back(ap);
+                        times.push_back(bt);
+                        times.push_back(oh);
+
+                        std::sort(times.begin(), times.end(), [](std::pair<double, std::string>& p1, std::pair<double, std::string>& p2){
+                            return p1.first < p2.first;
+                        });
+
+                        for (int i = 0; i < times.size(); i++) {
+                            std::cout << times[i].second << " executed in " << times[i].first << " milliseconds";
+                            if (i != 0) std::cout << " | " << times[i].first - times[0].first << " milliseconds slower (" << (times[i].first * 100 / times[0].first) - 100 << "%).";
+                            std::cout << std::endl;
+                        }
+
+                        times.clear();
+
+                        ap.first = approximationDistance;
+                        bt.first = backTrackingDistance;
+                        oh.first = heuristicDistance;
+
+                        std::cout << ap.first << " " << ap.second << std::endl;
+
+                        times.push_back(ap);
+                        times.push_back(bt);
+                        times.push_back(oh);
+
+                        std::sort(times.begin(), times.end(), [](std::pair<double, std::string>& p1, std::pair<double, std::string>& p2){
+                            return p1.first < p2.first;
+                        });
+
+                        std::cout << std::endl;
+
+                        for (int i = 0; i < times.size(); i++) {
+                            std::cout << times[i].second << " got a distance of " << times[i].first << " meters";
+                            if (i != 0) std::cout << " | " << times[i].first - times[0].first << " meters longer (" << (times[i].first * 100 / times[0].first) - 100 << "%).";
+                            std::cout << std::endl;
+                        }
 
                         break;
                     }
@@ -345,6 +397,10 @@ void UserInterface::showMenu() {
                         }
 
                         break;
+                    }
+
+                    default: {
+                        std::cout << "Invalid input\n\n";
                     }
                 }
                 break;
