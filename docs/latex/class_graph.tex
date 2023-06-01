@@ -1,0 +1,431 @@
+\hypertarget{class_graph}{}\doxysection{Graph Class Reference}
+\label{class_graph}\index{Graph@{Graph}}
+
+
+Represents a graph where the nodes are locations related to shipping deliveries, tourism, ... And the edges represent the connection between these nodes.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}{Graph}} ()
+\begin{DoxyCompactList}\small\item\em Creates an empty graph. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \& \mbox{\hyperlink{class_graph_ad537f563a977a1742c07db471c58db11}{get\+Vertex\+Set}} () const
+\begin{DoxyCompactList}\small\item\em Get the unordered\+\_\+map where all the stations are stored. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_ae40dba49da05b94597ba532fa15f7f40}{add\+Vertex}} (const int id)
+\begin{DoxyCompactList}\small\item\em Adds a vertex to the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_a9e4a152446783a1b4005d88492d1023d}{add\+Vertex\+Real\+Graph}} (const int id, const double longitude, const double latitude)
+\begin{DoxyCompactList}\small\item\em Adds a vertex in info from a real graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_graph_af5b9bbfaa2dff75fb7aeee55644add54}{add\+Bidirectional\+Edge}} (const int origin, const int dest, const double distance)
+\begin{DoxyCompactList}\small\item\em Adds an edge to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a77f505e352076f6837642a5dbefb4947}{fill}} (const std\+::string \&path, bool is\+Real\+Graph)
+\begin{DoxyCompactList}\small\item\em Populates the graph with the information from the csv files in the dataset. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a0f6e962d946210044a9c856dff7f0734}{read\+Vertices}} (const std\+::string \&path, bool is\+Real\+Graph)
+\begin{DoxyCompactList}\small\item\em Reads the vertices from the file and adds them to the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a5d65802b4578887cb866b1121c39aa71}{read\+Edges}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Reads the edges from the file and adds them into the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a0b5f99dbf488b7140a28732d81116c1f}{tsp\+BTRec}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$vertex, double \&min\+Dist, double distance, unsigned int count, std\+::vector$<$ int $>$ \&path, int $\ast$array)
+\begin{DoxyCompactList}\small\item\em Does the recursive work of tsp\+BT. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_aa84c14aba2aef86b57ac09d8e2ba6e74}{tsp\+BT}} (std\+::vector$<$ int $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Executes a backtracking algorithm to solve the TSP problem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_acb18a1f9d2ad51214d4211d60edf6860}{prim}} ()
+\begin{DoxyCompactList}\small\item\em Executes prim\textquotesingle{}s algorithm to compute MST. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a76382739405ad527be4507cad70bd5dc}{dfs\+Pre\+Order}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$vertex, std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&\mbox{\hyperlink{class_graph_a1b4054dbfb1aa349c364378689b72cd1}{pre\+Order}})
+\begin{DoxyCompactList}\small\item\em Executes Depth First Search (DFS) algorithm to compute pre-\/order of graph. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \mbox{\hyperlink{class_graph_a1b4054dbfb1aa349c364378689b72cd1}{pre\+Order}} ()
+\begin{DoxyCompactList}\small\item\em Finds the pre\+Order of a graph. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_a506ca8578b47d89d6b46809613d072aa}{approximation}} (std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Executes an approximation algorithm for TSP. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_af6ef066468dbdd5c28ea2720df422563}{haversine}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$v1, \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$v2)
+\begin{DoxyCompactList}\small\item\em Calculates the distance between two vertices using their latitude and longitude. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_a2b356bd248a4f48d62f5108cbe158732}{convert\+\_\+to\+\_\+rads}} (double coord)
+\begin{DoxyCompactList}\small\item\em Converts a coordinate to radians. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_graph_aa60f8dcff7ef2ba0b51bf9cf0b2ceecc}{other\+Heuristics}} (std\+::vector$<$ int $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Calculates a possible TSP solution visiting the closest neighbor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_aac87f085cba8fd15bc31627da3fdacd6}{other\+Heuristics\+Rec}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$vertex, double \&distance, std\+::vector$<$ int $>$ \&path, unsigned int count, bool \&valid\+Approximation)
+\begin{DoxyCompactList}\small\item\em Executes the \char`\"{}heavy work\char`\"{} of the heuristic. Visits every node using the shortest edge using recursion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a graph where the nodes are locations related to shipping deliveries, tourism, ... And the edges represent the connection between these nodes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}\label{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}} 
+\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily Graph\+::\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Creates an empty graph. 
+
+\begin{DoxyNote}{Note}
+\+: Complexity time\+: O(1) 
+\end{DoxyNote}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graph_af5b9bbfaa2dff75fb7aeee55644add54}\label{class_graph_af5b9bbfaa2dff75fb7aeee55644add54}} 
+\index{Graph@{Graph}!addBidirectionalEdge@{addBidirectionalEdge}}
+\index{addBidirectionalEdge@{addBidirectionalEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addBidirectionalEdge()}{addBidirectionalEdge()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Bidirectional\+Edge (\begin{DoxyParamCaption}\item[{const int}]{origin,  }\item[{const int}]{dest,  }\item[{const double}]{distance }\end{DoxyParamCaption})}
+
+
+
+Adds an edge to the graph. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(\+V)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The vertex of origin. \\
+\hline
+{\em dest} & The vertex of destination. \\
+\hline
+{\em distance} & The distance of the edge\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge was successfully added. 
+
+False otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ae40dba49da05b94597ba532fa15f7f40}\label{class_graph_ae40dba49da05b94597ba532fa15f7f40}} 
+\index{Graph@{Graph}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Vertex (\begin{DoxyParamCaption}\item[{const int}]{id }\end{DoxyParamCaption})}
+
+
+
+Adds a vertex to the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The vertex id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexity time\+: O(\+V)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+True if the vertex was successfully added. 
+
+False otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a9e4a152446783a1b4005d88492d1023d}\label{class_graph_a9e4a152446783a1b4005d88492d1023d}} 
+\index{Graph@{Graph}!addVertexRealGraph@{addVertexRealGraph}}
+\index{addVertexRealGraph@{addVertexRealGraph}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addVertexRealGraph()}{addVertexRealGraph()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Vertex\+Real\+Graph (\begin{DoxyParamCaption}\item[{const int}]{id,  }\item[{const double}]{longitude,  }\item[{const double}]{latitude }\end{DoxyParamCaption})}
+
+
+
+Adds a vertex in info from a real graph. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(\+V)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The vertex id \\
+\hline
+{\em longitude} & The longitude of the vertex \\
+\hline
+{\em latitude} & The latitude of the vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vertex was successfully added. 
+
+False otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a506ca8578b47d89d6b46809613d072aa}\label{class_graph_a506ca8578b47d89d6b46809613d072aa}} 
+\index{Graph@{Graph}!approximation@{approximation}}
+\index{approximation@{approximation}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{approximation()}{approximation()}}
+{\footnotesize\ttfamily double Graph\+::approximation (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Executes an approximation algorithm for TSP. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V+E)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path corresponding to the best value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The approximation value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a2b356bd248a4f48d62f5108cbe158732}\label{class_graph_a2b356bd248a4f48d62f5108cbe158732}} 
+\index{Graph@{Graph}!convert\_to\_rads@{convert\_to\_rads}}
+\index{convert\_to\_rads@{convert\_to\_rads}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{convert\_to\_rads()}{convert\_to\_rads()}}
+{\footnotesize\ttfamily double Graph\+::convert\+\_\+to\+\_\+rads (\begin{DoxyParamCaption}\item[{double}]{coord }\end{DoxyParamCaption})}
+
+
+
+Converts a coordinate to radians. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em coord} & The coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The coordinate in radians 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a76382739405ad527be4507cad70bd5dc}\label{class_graph_a76382739405ad527be4507cad70bd5dc}} 
+\index{Graph@{Graph}!dfsPreOrder@{dfsPreOrder}}
+\index{dfsPreOrder@{dfsPreOrder}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{dfsPreOrder()}{dfsPreOrder()}}
+{\footnotesize\ttfamily void Graph\+::dfs\+Pre\+Order (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{vertex,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \&}]{pre\+Order }\end{DoxyParamCaption})}
+
+
+
+Executes Depth First Search (DFS) algorithm to compute pre-\/order of graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The root of DFS \\
+\hline
+{\em pre\+Order} & The order of DFS\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V+E) 
+\end{DoxyNote}
+\mbox{\Hypertarget{class_graph_a77f505e352076f6837642a5dbefb4947}\label{class_graph_a77f505e352076f6837642a5dbefb4947}} 
+\index{Graph@{Graph}!fill@{fill}}
+\index{fill@{fill}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily void Graph\+::fill (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{bool}]{is\+Real\+Graph }\end{DoxyParamCaption})}
+
+
+
+Populates the graph with the information from the csv files in the dataset. 
+
+\begin{DoxyNote}{Note}
+O(V+E)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path \\
+\hline
+{\em is\+Real\+Graph} & Boolean telling if file is from Real \mbox{\hyperlink{class_graph}{Graph}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_ad537f563a977a1742c07db471c58db11}\label{class_graph_ad537f563a977a1742c07db471c58db11}} 
+\index{Graph@{Graph}!getVertexSet@{getVertexSet}}
+\index{getVertexSet@{getVertexSet}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getVertexSet()}{getVertexSet()}}
+{\footnotesize\ttfamily const std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ \& Graph\+::get\+Vertex\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the unordered\+\_\+map where all the stations are stored. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1).
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+An unordered\+\_\+map containing all the stations of the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_af6ef066468dbdd5c28ea2720df422563}\label{class_graph_af6ef066468dbdd5c28ea2720df422563}} 
+\index{Graph@{Graph}!haversine@{haversine}}
+\index{haversine@{haversine}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{haversine()}{haversine()}}
+{\footnotesize\ttfamily double Graph\+::haversine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{v1,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{v2 }\end{DoxyParamCaption})}
+
+
+
+Calculates the distance between two vertices using their latitude and longitude. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & The first vertex \\
+\hline
+{\em v2} & The second vertex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance between these vertices 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_aa60f8dcff7ef2ba0b51bf9cf0b2ceecc}\label{class_graph_aa60f8dcff7ef2ba0b51bf9cf0b2ceecc}} 
+\index{Graph@{Graph}!otherHeuristics@{otherHeuristics}}
+\index{otherHeuristics@{otherHeuristics}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{otherHeuristics()}{otherHeuristics()}}
+{\footnotesize\ttfamily double Graph\+::other\+Heuristics (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Calculates a possible TSP solution visiting the closest neighbor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of the possible TSP solution. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance upon success or -\/1 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_aac87f085cba8fd15bc31627da3fdacd6}\label{class_graph_aac87f085cba8fd15bc31627da3fdacd6}} 
+\index{Graph@{Graph}!otherHeuristicsRec@{otherHeuristicsRec}}
+\index{otherHeuristicsRec@{otherHeuristicsRec}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{otherHeuristicsRec()}{otherHeuristicsRec()}}
+{\footnotesize\ttfamily void Graph\+::other\+Heuristics\+Rec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{vertex,  }\item[{double \&}]{distance,  }\item[{std\+::vector$<$ int $>$ \&}]{path,  }\item[{unsigned int}]{count,  }\item[{bool \&}]{valid\+Approximation }\end{DoxyParamCaption})}
+
+
+
+Executes the \char`\"{}heavy work\char`\"{} of the heuristic. Visits every node using the shortest edge using recursion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The root \\
+\hline
+{\em distance} & The current distance \\
+\hline
+{\em path} & The current path \\
+\hline
+{\em count} & The number of nodes already visited \\
+\hline
+{\em valid\+Approximation} & Flag telling is graph is complete or incomplete. If complete this variable is set to true and false otherwise. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a1b4054dbfb1aa349c364378689b72cd1}\label{class_graph_a1b4054dbfb1aa349c364378689b72cd1}} 
+\index{Graph@{Graph}!preOrder@{preOrder}}
+\index{preOrder@{preOrder}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{preOrder()}{preOrder()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ $>$ Graph\+::pre\+Order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds the pre\+Order of a graph. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V+E)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Vector with vertices in pre-\/order 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_acb18a1f9d2ad51214d4211d60edf6860}\label{class_graph_acb18a1f9d2ad51214d4211d60edf6860}} 
+\index{Graph@{Graph}!prim@{prim}}
+\index{prim@{prim}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{prim()}{prim()}}
+{\footnotesize\ttfamily void Graph\+::prim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executes prim\textquotesingle{}s algorithm to compute MST. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(\+E Log V) 
+\end{DoxyNote}
+\mbox{\Hypertarget{class_graph_a5d65802b4578887cb866b1121c39aa71}\label{class_graph_a5d65802b4578887cb866b1121c39aa71}} 
+\index{Graph@{Graph}!readEdges@{readEdges}}
+\index{readEdges@{readEdges}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{readEdges()}{readEdges()}}
+{\footnotesize\ttfamily void Graph\+::read\+Edges (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Reads the edges from the file and adds them into the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexity time\+: O(\+E) 
+\end{DoxyNote}
+\mbox{\Hypertarget{class_graph_a0f6e962d946210044a9c856dff7f0734}\label{class_graph_a0f6e962d946210044a9c856dff7f0734}} 
+\index{Graph@{Graph}!readVertices@{readVertices}}
+\index{readVertices@{readVertices}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{readVertices()}{readVertices()}}
+{\footnotesize\ttfamily void Graph\+::read\+Vertices (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{bool}]{is\+Real\+Graph }\end{DoxyParamCaption})}
+
+
+
+Reads the vertices from the file and adds them to the graph. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(\+V)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path \\
+\hline
+{\em is\+Real\+Graph} & Boolean telling if file is from Real \mbox{\hyperlink{class_graph}{Graph}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_aa84c14aba2aef86b57ac09d8e2ba6e74}\label{class_graph_aa84c14aba2aef86b57ac09d8e2ba6e74}} 
+\index{Graph@{Graph}!tspBT@{tspBT}}
+\index{tspBT@{tspBT}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspBT()}{tspBT()}}
+{\footnotesize\ttfamily double Graph\+::tsp\+BT (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Executes a backtracking algorithm to solve the TSP problem. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V!)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of nodes corresponding to the minimal distance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimal distance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a0b5f99dbf488b7140a28732d81116c1f}\label{class_graph_a0b5f99dbf488b7140a28732d81116c1f}} 
+\index{Graph@{Graph}!tspBTRec@{tspBTRec}}
+\index{tspBTRec@{tspBTRec}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspBTRec()}{tspBTRec()}}
+{\footnotesize\ttfamily void Graph\+::tsp\+BTRec (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{vertex,  }\item[{double \&}]{min\+Dist,  }\item[{double}]{distance,  }\item[{unsigned int}]{count,  }\item[{std\+::vector$<$ int $>$ \&}]{path,  }\item[{int $\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+Does the recursive work of tsp\+BT. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V!)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The root of the TSP problem \\
+\hline
+{\em min\+Dist} & The minimal distance of the TSP problem \\
+\hline
+{\em distance} & The current distance of the TSP \\
+\hline
+{\em count} & The number of the nodes visited in the current path \\
+\hline
+{\em path} & The current path \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/henrique/\+Desktop/\+DA-\/\+PROJ2/include/Graph.\+h\item 
+/\+Users/henrique/\+Desktop/\+DA-\/\+PROJ2/source/Graph.\+cpp\end{DoxyCompactItemize}

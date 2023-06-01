@@ -1,0 +1,319 @@
+\hypertarget{class_vertex}{}\doxysection{Vertex Class Reference}
+\label{class_vertex}\index{Vertex@{Vertex}}
+
+
+Represents a vertex in the graph.  
+
+
+
+
+{\ttfamily \#include $<$Vertex\+Edge.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vertex_a69b3eea9d0dbcd75d056a5f87cdd4854}{Vertex}} (const int id)
+\begin{DoxyCompactList}\small\item\em Constructor that initializes a vertex with id. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex_a857e3ee9d857c140316b5ac29111986f}{Vertex}} (const int id, const double longitude, const double latitude)
+\begin{DoxyCompactList}\small\item\em Constructor that initializes a vertex with id, longitude and latitude. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_vertex_a75b6b4a4afc26affea59fdae48aa30b1}{get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Returns the id of a vertex. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_vertex_af1a2bee6c38f511cbfea082eb7149537}{get\+Longitude}} () const
+\begin{DoxyCompactList}\small\item\em Return the longitude of the vertex. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_vertex_a7455a09de51b274867edae2254cef38d}{get\+Latitude}} () const
+\begin{DoxyCompactList}\small\item\em Returns the latitude of the vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_aa4bd82105b85ee53a917391f4811cd8a}{is\+Visited}} () const
+\begin{DoxyCompactList}\small\item\em Sees if a vertex has benn visited. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_a15eeabbbb6d517af746ae137c6d5b595}{set\+Visited}} (bool visited)
+\begin{DoxyCompactList}\small\item\em Sets a vertex as visited or not. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_vertex_a027ec4f44cde7ec1b6481854a2980127}{get\+Distance}} () const
+\begin{DoxyCompactList}\small\item\em Gets the distance it takes to get to this vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_aa1aebd234860e5b8165e0bdb6be5222e}{set\+Distance}} (double distance)
+\begin{DoxyCompactList}\small\item\em Sets the distance it takes to get to this vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{Edge}} $\ast$ \mbox{\hyperlink{class_vertex_a6e120e57da6af94892fae44e05868794}{get\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Gets the edge that connects this vertex to the previous one. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_vertex_abe4bc30005eec65e775d0cd51f456460}{set\+Path}} (\mbox{\hyperlink{class_edge}{Edge}} $\ast$path)
+\begin{DoxyCompactList}\small\item\em Sets the edge that connects this vertex to the previous one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{Edge}} $\ast$ \mbox{\hyperlink{class_vertex_ac6be654d5efdc6f88035ce81aab85508}{add\+Edge}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$dest, const double distance)
+\begin{DoxyCompactList}\small\item\em Connects two vertices by adding an edge. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}} $\ast$ $>$ \mbox{\hyperlink{class_vertex_a9858f2aa388d2bfb49d9df8f4504b5a0}{get\+Adj}} () const
+\begin{DoxyCompactList}\small\item\em Gets the outgoing edges of this vertex. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_vertex_ad4ccd48170a1530ec1db5eb306357a74}{operator$<$}} (\mbox{\hyperlink{class_vertex}{Vertex}} \&vertex) const
+\begin{DoxyCompactList}\small\item\em Compares this vertex\textquotesingle{}s cost to another vertex\textquotesingle{}s cost. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vertex_a78ba760e405ba9f66129b3870065b48f}\label{class_vertex_a78ba760e405ba9f66129b3870065b48f}} 
+int {\bfseries queue\+Index}
+\begin{DoxyCompactList}\small\item\em Index of this vertex in Priority Queue. Need for Prim. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a vertex in the graph. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vertex_a69b3eea9d0dbcd75d056a5f87cdd4854}\label{class_vertex_a69b3eea9d0dbcd75d056a5f87cdd4854}} 
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{Vertex()}{Vertex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Vertex\+::\+Vertex (\begin{DoxyParamCaption}\item[{const int}]{id }\end{DoxyParamCaption})}
+
+
+
+Constructor that initializes a vertex with id. 
+
+\begin{DoxyNote}{Note}
+Used for Toy-\/graphs and Medium Graphs 
+
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The vertex id. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_vertex_a857e3ee9d857c140316b5ac29111986f}\label{class_vertex_a857e3ee9d857c140316b5ac29111986f}} 
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{Vertex()}{Vertex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Vertex\+::\+Vertex (\begin{DoxyParamCaption}\item[{const int}]{id,  }\item[{const double}]{longitude,  }\item[{const double}]{latitude }\end{DoxyParamCaption})}
+
+
+
+Constructor that initializes a vertex with id, longitude and latitude. 
+
+\begin{DoxyNote}{Note}
+Used for Real-\/world Graphs 
+
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id \\
+\hline
+{\em longitude} & The longitude \\
+\hline
+{\em latitude} & The latitude \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vertex_ac6be654d5efdc6f88035ce81aab85508}\label{class_vertex_ac6be654d5efdc6f88035ce81aab85508}} 
+\index{Vertex@{Vertex}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{Edge}} $\ast$ Vertex\+::add\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{dest,  }\item[{const double}]{distance }\end{DoxyParamCaption})}
+
+
+
+Connects two vertices by adding an edge. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & The destination vertex. \\
+\hline
+{\em distance} & The distance of the edge.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The edge if it was successfully created. 
+
+nullptr otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_a9858f2aa388d2bfb49d9df8f4504b5a0}\label{class_vertex_a9858f2aa388d2bfb49d9df8f4504b5a0}} 
+\index{Vertex@{Vertex}!getAdj@{getAdj}}
+\index{getAdj@{getAdj}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getAdj()}{getAdj()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}} $\ast$ $>$ Vertex\+::get\+Adj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the outgoing edges of this vertex. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Vector with the outgoing edges. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_a027ec4f44cde7ec1b6481854a2980127}\label{class_vertex_a027ec4f44cde7ec1b6481854a2980127}} 
+\index{Vertex@{Vertex}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily double Vertex\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the distance it takes to get to this vertex. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The distance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_a75b6b4a4afc26affea59fdae48aa30b1}\label{class_vertex_a75b6b4a4afc26affea59fdae48aa30b1}} 
+\index{Vertex@{Vertex}!getId@{getId}}
+\index{getId@{getId}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily int Vertex\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the id of a vertex. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The vertex id. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_a7455a09de51b274867edae2254cef38d}\label{class_vertex_a7455a09de51b274867edae2254cef38d}} 
+\index{Vertex@{Vertex}!getLatitude@{getLatitude}}
+\index{getLatitude@{getLatitude}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getLatitude()}{getLatitude()}}
+{\footnotesize\ttfamily double Vertex\+::get\+Latitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the latitude of the vertex. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The latitude 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_af1a2bee6c38f511cbfea082eb7149537}\label{class_vertex_af1a2bee6c38f511cbfea082eb7149537}} 
+\index{Vertex@{Vertex}!getLongitude@{getLongitude}}
+\index{getLongitude@{getLongitude}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getLongitude()}{getLongitude()}}
+{\footnotesize\ttfamily double Vertex\+::get\+Longitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the longitude of the vertex. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The longitude 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_a6e120e57da6af94892fae44e05868794}\label{class_vertex_a6e120e57da6af94892fae44e05868794}} 
+\index{Vertex@{Vertex}!getPath@{getPath}}
+\index{getPath@{getPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{Edge}} $\ast$ Vertex\+::get\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the edge that connects this vertex to the previous one. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The \mbox{\hyperlink{class_edge}{Edge}} if the \mbox{\hyperlink{class_vertex}{Vertex}} is connected. nullptr otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_aa4bd82105b85ee53a917391f4811cd8a}\label{class_vertex_aa4bd82105b85ee53a917391f4811cd8a}} 
+\index{Vertex@{Vertex}!isVisited@{isVisited}}
+\index{isVisited@{isVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{isVisited()}{isVisited()}}
+{\footnotesize\ttfamily bool Vertex\+::is\+Visited (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Sees if a vertex has benn visited. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+True if visited, False otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_ad4ccd48170a1530ec1db5eb306357a74}\label{class_vertex_ad4ccd48170a1530ec1db5eb306357a74}} 
+\index{Vertex@{Vertex}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Vertex\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} \&}]{vertex }\end{DoxyParamCaption}) const}
+
+
+
+Compares this vertex\textquotesingle{}s cost to another vertex\textquotesingle{}s cost. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1).
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & The another vertex that we are going to compare with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this vertex\textquotesingle{}s cost is fewer than the other vertex\textquotesingle{}s cost. False otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_aa1aebd234860e5b8165e0bdb6be5222e}\label{class_vertex_aa1aebd234860e5b8165e0bdb6be5222e}} 
+\index{Vertex@{Vertex}!setDistance@{setDistance}}
+\index{setDistance@{setDistance}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setDistance()}{setDistance()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Distance (\begin{DoxyParamCaption}\item[{double}]{distance }\end{DoxyParamCaption})}
+
+
+
+Sets the distance it takes to get to this vertex. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em distance} & The distance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_vertex_abe4bc30005eec65e775d0cd51f456460}\label{class_vertex_abe4bc30005eec65e775d0cd51f456460}} 
+\index{Vertex@{Vertex}!setPath@{setPath}}
+\index{setPath@{setPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setPath()}{setPath()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}} $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Sets the edge that connects this vertex to the previous one. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The edge that connects this vertex to the previous one. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_vertex_a15eeabbbb6d517af746ae137c6d5b595}\label{class_vertex_a15eeabbbb6d517af746ae137c6d5b595}} 
+\index{Vertex@{Vertex}!setVisited@{setVisited}}
+\index{setVisited@{setVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setVisited()}{setVisited()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Visited (\begin{DoxyParamCaption}\item[{bool}]{visited }\end{DoxyParamCaption})}
+
+
+
+Sets a vertex as visited or not. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em visited} & The visited attribute. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/henrique/\+Desktop/\+DA-\/\+PROJ2/include/Vertex\+Edge.\+h\item 
+/\+Users/henrique/\+Desktop/\+DA-\/\+PROJ2/source/Vertex\+Edge.\+cpp\end{DoxyCompactItemize}

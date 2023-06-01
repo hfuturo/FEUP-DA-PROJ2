@@ -1,0 +1,55 @@
+\hypertarget{_graph_8h_source}{}\doxysection{Graph.\+h}
+\label{_graph_8h_source}\index{/Users/henrique/Desktop/DA-\/PROJ2/include/Graph.h@{/Users/henrique/Desktop/DA-\/PROJ2/include/Graph.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DA\_PROJ2\_GRAPH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DA\_PROJ2\_GRAPH\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../include/VertexEdge.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_graph}{Graph}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ std::unordered\_map<int,\ Vertex*>\ vertexSet;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}{Graph}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<int,\ Vertex*>\&\ \mbox{\hyperlink{class_graph_ad537f563a977a1742c07db471c58db11}{getVertexSet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_graph_ae40dba49da05b94597ba532fa15f7f40}{addVertex}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_graph_a9e4a152446783a1b4005d88492d1023d}{addVertexRealGraph}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ longitude,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ latitude);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_graph_af5b9bbfaa2dff75fb7aeee55644add54}{addBidirectionalEdge}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ origin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \ dest,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ distance);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_a77f505e352076f6837642a5dbefb4947}{fill}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{bool}\ isRealGraph);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_a0f6e962d946210044a9c856dff7f0734}{readVertices}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{bool}\ isRealGraph);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_a5d65802b4578887cb866b1121c39aa71}{readEdges}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_a0b5f99dbf488b7140a28732d81116c1f}{tspBTRec}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ vertex,\ \textcolor{keywordtype}{double}\&\ minDist,\ \textcolor{keywordtype}{double}\ distance,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count,\ std::vector<int>\&\ path,\ \textcolor{keywordtype}{int}*\ array);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_aa84c14aba2aef86b57ac09d8e2ba6e74}{tspBT}}(std::vector<int>\&\ path);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_acb18a1f9d2ad51214d4211d60edf6860}{prim}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_a76382739405ad527be4507cad70bd5dc}{dfsPreOrder}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ vertex,\ std::vector<Vertex*>\&\ \mbox{\hyperlink{class_graph_a1b4054dbfb1aa349c364378689b72cd1}{preOrder}});}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ std::vector<Vertex*>\ \mbox{\hyperlink{class_graph_a1b4054dbfb1aa349c364378689b72cd1}{preOrder}}();}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_a506ca8578b47d89d6b46809613d072aa}{approximation}}(std::vector<Vertex*>\&\ path);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00171\ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_af6ef066468dbdd5c28ea2720df422563}{haversine}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ v1,\ \mbox{\hyperlink{class_vertex}{Vertex}}*\ v2);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00181\ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_a2b356bd248a4f48d62f5108cbe158732}{convert\_to\_rads}}(\textcolor{keywordtype}{double}\ coord);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_graph_aa60f8dcff7ef2ba0b51bf9cf0b2ceecc}{otherHeuristics}}(std::vector<int>\&\ path);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_aac87f085cba8fd15bc31627da3fdacd6}{otherHeuristicsRec}}(\mbox{\hyperlink{class_vertex}{Vertex}}*\ vertex,\ \textcolor{keywordtype}{double}\&\ distance,\ std::vector<int>\&\ path,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ count,\ \textcolor{keywordtype}{bool}\&\ validApproximation);}
+\DoxyCodeLine{00201\ \};}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DA\_PROJ2\_GRAPH\_H}}
+
+\end{DoxyCode}

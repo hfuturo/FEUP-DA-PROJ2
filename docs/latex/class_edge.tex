@@ -1,0 +1,129 @@
+\hypertarget{class_edge}{}\doxysection{Edge Class Reference}
+\label{class_edge}\index{Edge@{Edge}}
+
+
+Represents an edge between two vertices.  
+
+
+
+
+{\ttfamily \#include $<$Vertex\+Edge.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge_a3e3e27d3f94e0fd3a3f3ee8d199444ac}{Edge}} (\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$origin, \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$dest, const double distance)
+\begin{DoxyCompactList}\small\item\em Constructor that initializes an edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ \mbox{\hyperlink{class_edge_aa03ab4b10c33e0dbe62b092bb4f36384}{get\+Origin}} () const
+\begin{DoxyCompactList}\small\item\em Returns the origin of the edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ \mbox{\hyperlink{class_edge_a5cda44e9ba257b03963a1ac301371a59}{get\+Dest}} () const
+\begin{DoxyCompactList}\small\item\em Returns the destination of the edge. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_edge_afd6d96365c7158f369125bf2958ca511}{get\+Distance}} () const
+\begin{DoxyCompactList}\small\item\em Returns the distance of the edge. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_edge_a64881280015bd83702fe3b2c6234b7e5}{set\+Reverse}} (\mbox{\hyperlink{class_edge}{Edge}} $\ast$reverse)
+\begin{DoxyCompactList}\small\item\em Sets the reverse edge that connects the destination station to this station. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an edge between two vertices. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_edge_a3e3e27d3f94e0fd3a3f3ee8d199444ac}\label{class_edge_a3e3e27d3f94e0fd3a3f3ee8d199444ac}} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{origin,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$}]{dest,  }\item[{const double}]{distance }\end{DoxyParamCaption})}
+
+
+
+Constructor that initializes an edge. 
+
+\begin{DoxyNote}{Note}
+Used for all graphs. 
+
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The origin of the edge. \\
+\hline
+{\em dest} & The destinations of the edge. \\
+\hline
+{\em distance} & The distance of the edge. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_edge_a5cda44e9ba257b03963a1ac301371a59}\label{class_edge_a5cda44e9ba257b03963a1ac301371a59}} 
+\index{Edge@{Edge}!getDest@{getDest}}
+\index{getDest@{getDest}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getDest()}{getDest()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ Edge\+::get\+Dest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the destination of the edge. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The destination of the edge. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_afd6d96365c7158f369125bf2958ca511}\label{class_edge_afd6d96365c7158f369125bf2958ca511}} 
+\index{Edge@{Edge}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily double Edge\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the distance of the edge. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The distance of the edge. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_aa03ab4b10c33e0dbe62b092bb4f36384}\label{class_edge_aa03ab4b10c33e0dbe62b092bb4f36384}} 
+\index{Edge@{Edge}!getOrigin@{getOrigin}}
+\index{getOrigin@{getOrigin}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getOrigin()}{getOrigin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ Edge\+::get\+Origin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the origin of the edge. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+The origin of the edge. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_a64881280015bd83702fe3b2c6234b7e5}\label{class_edge_a64881280015bd83702fe3b2c6234b7e5}} 
+\index{Edge@{Edge}!setReverse@{setReverse}}
+\index{setReverse@{setReverse}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{setReverse()}{setReverse()}}
+{\footnotesize\ttfamily void Edge\+::set\+Reverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{Edge}} $\ast$}]{reverse }\end{DoxyParamCaption})}
+
+
+
+Sets the reverse edge that connects the destination station to this station. 
+
+\begin{DoxyNote}{Note}
+Complexity time\+: O(1)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em reverse} & The reverse edge. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/henrique/\+Desktop/\+DA-\/\+PROJ2/include/Vertex\+Edge.\+h\item 
+/\+Users/henrique/\+Desktop/\+DA-\/\+PROJ2/source/Vertex\+Edge.\+cpp\end{DoxyCompactItemize}

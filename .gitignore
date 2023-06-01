@@ -5,9 +5,6 @@ build/
 #macOS
 .DS_Store
 
-#doxygen
-docs/
-
 #IDE
 .idea/
 .vscode
