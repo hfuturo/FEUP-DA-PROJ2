@@ -278,6 +278,9 @@ The distance between these vertices
 
 Calculates a possible TSP solution visiting the closest neighbor. 
 
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V+E)
+\end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
 {\em path} & The path of the possible TSP solution. \\
@@ -296,6 +299,9 @@ The distance upon success or -\/1 otherwise.
 
 Executes the \char`\"{}heavy work\char`\"{} of the heuristic. Visits every node using the shortest edge using recursion. 
 
+\begin{DoxyNote}{Note}
+Complexity time\+: O(V+E)
+\end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
 {\em vertex} & The root \\
