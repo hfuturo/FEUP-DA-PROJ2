@@ -183,6 +183,8 @@ public:
      /**
       * @brief Calculates a possible TSP solution visiting the closest neighbor.
       *
+      *  @note Complexity time: O(V+E)
+      *
       * @param path The path of the possible TSP solution.
       * @return The distance upon success or -1 otherwise.
       */
@@ -190,6 +192,8 @@ public:
 
      /**
       * @brief Executes the "heavy work" of the heuristic. Visits every node using the shortest edge using recursion.
+      *
+      * @note Complexity time: O(V+E)
       *
       * @param vertex The root
       * @param distance The current distance
