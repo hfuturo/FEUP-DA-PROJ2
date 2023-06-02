@@ -148,7 +148,12 @@ void UserInterface::showMenu() {
 
                 std::cout << "*** Approximation Algorithm ***\n\n";
                 std::vector<Vertex*> path;
+
+                auto start = std::chrono::high_resolution_clock::now();
                 double distance = graph.approximation(path);
+                auto stop = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> time = stop - start;
+
                 std::cout << "Path: ";
 
                 bool first = true;
@@ -162,7 +167,8 @@ void UserInterface::showMenu() {
                     }
                 }
                 std::cout << std::endl;
-                std::cout << "Distance: " << distance;
+                std::cout << "Distance: " << distance << std::endl;
+                std::cout << "Time: " << time.count() << " milliseconds";
                 break;
             }
 
@@ -173,7 +179,11 @@ void UserInterface::showMenu() {
                 }
 
                 std::vector<int> path;
+
+                auto start = std::chrono::high_resolution_clock::now();
                 double distance = graph.otherHeuristics(path);
+                auto stop = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> time = stop - start;
 
                 if (distance == -1) {
                     std::cout << "Unable to do approximation. Graph is not complete";
@@ -193,7 +203,8 @@ void UserInterface::showMenu() {
                     }
                 }
                 std::cout << std::endl;
-                std::cout << "Distance: " << distance;
+                std::cout << "Distance: " << distance << std::endl;
+                std::cout << "Time: " << time.count() << " milliseconds";
                 break;
             }
 

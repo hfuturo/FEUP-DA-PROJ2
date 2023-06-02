@@ -268,7 +268,7 @@ double Graph::tspBT(std::vector<int> &path) {
         v.second->setPath(nullptr);
     }
 
-    int *array = new int(getVertexSet().size());
+    int *array = new int((int)getVertexSet().size());
 
     double minDist = INF;
     double distance = 0;
